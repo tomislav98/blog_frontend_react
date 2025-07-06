@@ -1,0 +1,29 @@
+@import "./variables.css";
+@import "./fonts.css";
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--brand-color-3, #222); /* fallback to dark */
+    color: white;
+    background-color: var(--lighter-dark);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* slight elevation */
+    font-size: 0.9rem;
+}
+
+.footer-nav {
+    margin-top: 1rem;
+}
+
+.footer-nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,128 @@
+@import "./variables.css";
+@import "./fonts.css";
+@import "./signup.css";
+.page-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.right-container {
+    display: flex;
+    padding: 2rem;
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center; /* horizontaly center */
+    align-items: center; /* vertical center */
+}
+
+.left-container {
+    display: flex;
+    padding: 2rem;
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center; /* horizontaly center */
+    align-items: end; /* vertical center */
+}
+
+.left-container {
+    background-color: var(--brand-color-3);
+}
+
+.right-container {
+    background-color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-group label {
+    display: flex;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.right-container h1 {
+    text-align: start;
+    width: 100%;
+    color: var(--grey900);
+}
+
+.form-group input {
+    padding: 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    height: 4rem;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+.form-group input::placeholder {
+    color: #999;
+    font-weight: bold;
+}
+
+.form-group-button {
+    height: 4rem;
+    width: 100%;
+}
+
+.form-group-button button {
+    border: none; /* Removes the border line */
+    border-radius: 8px; /* Adds rounded corners */
+    background-color: var(--grey900);
+    color: white;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+}
+
+form {
+    max-width: 100%;
+    width: 70%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center; /* horizontaly center */
+    align-items: center; /* vertical center */
+}
+
+/* CHECK BOX */
+.checkbox-group {
+    display: flex;
+    direction: row;
+    align-items: start;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: #999;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+}
+
+.checkbox-group span {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group a {
+    color: var(--brand-color-1); /* Or any brand color you use */
+    text-decoration: underline;
+}

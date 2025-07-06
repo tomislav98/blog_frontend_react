@@ -1,0 +1,21 @@
+.register-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.register-title {
+    margin: 1rem;
+}
+
+.register-title b {
+    font-size: 3rem;
+}
+
+.helper-text {
+    font-size: 1rem; /* smaller than base text */
+
+    margin: 1rem;
+    text-align: center;
+}
