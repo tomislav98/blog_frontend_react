@@ -4,15 +4,72 @@
 footer {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     background-color: var(--brand-color-3, #222); /* fallback to dark */
     color: white;
-    background-color: var(--lighter-dark);
-    padding: 1.5rem 2rem;
+    background-color: var(--footer-color);
+    padding: 2rem;
+    align-items: center;
     text-align: center;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* slight elevation */
     font-size: 0.9rem;
 }
 
+.footer-content-1 {
+    display: flex;
+    width: 70%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-content-2 {
+    display: flex;
+    width: 70%;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.footer-content-section-1 {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: start;
+}
+.footer-content-section-1 p {
+    max-width: 400px; /* or any value you want */
+    text-align: left;
+}
+
+.footer-content-section-1 a {
+    display: block; /* Stack links vertically */
+    color: var(--grey100); /* Adjust to match footer */
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-content-section-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.footer-content-section-2 a {
+    display: block; /* Stack links vertically */
+    color: var(--grey100); /* Adjust to match footer */
+    text-decoration: none;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footer-content-section-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
 .footer-nav {
     margin-top: 1rem;
 }
@@ -26,4 +83,31 @@ footer {
 
 .footer-nav a:hover {
     text-decoration: underline;
+}
+
+hr.solid {
+    all: unset;
+    border-top: 1px solid #888;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    flex: 0 0 calc((100% / 3) - 0.5rem);
+    display: inline-block;
+    background-color: var(--grey700); /* nice blog-blue */
+    color: var(--grey100);
+    padding: 1.2rem 0.4rem;
+    border-radius: 10px; /* pill shape */
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #666;
 }

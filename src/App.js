@@ -1,34 +1,21 @@
-import "./App.css";
-import { Global, css } from "@emotion/react";
 import HomePage from "./pages/HomePage";
-
+import Hero from "./components/Hero";
+import Post from "./components/Post";
+import "./styles/global.css";
 function App() {
   return (
     <div>
-      <GlobalStyles />
+      <header>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle"
+        />
+      </header>
       <HomePage />
+      <Hero />
+      <Post />
     </div>
   );
 }
-
-const GlobalStyles = () => (
-  <Global
-    styles={css`
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background-color: #ffffff;
-        font-family: "Poppins", sans-serif;
-      }
-      * {
-        box-sizing: border-box;
-      }
-    `}
-  />
-);
 
 export default App;

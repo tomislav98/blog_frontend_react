@@ -1,0 +1,66 @@
+/* Navbar */
+.navbar {
+    background-color: var(--brand-color-1);
+    padding: 20px;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .main-menu ul {
+    display: flex;
+}
+
+.navbar ul li a {
+    display: block;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.navbar ul li a:hover {
+    color: var(--brand-color-1);
+}
+
+.navbar ul li:last-child a {
+    margin-left: 10px;
+}
+
+.navbar ul li a i {
+    margin-right: 10px;
+}
+
+/* Form */
+
+.navbar .form {
+    display: flex;
+    background-color: #fff;
+    height: 100%; /* or whatever fits your navbar */
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 32px;
+}
+
+.navbar .form-control {
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.navbar .form-control:focus {
+    outline: none;
+    border-color: transparent;
+}
+
+.navbar .form i {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .main-menu li:nth-last-child(2) {
+    margin-right: 10px;
+}

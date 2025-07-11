@@ -1,0 +1,21 @@
+.hero {
+    margin-bottom: 50px;
+}
+
+.hero .container .hero-content {
+    width: 70%;
+}
+
+.hero .hero-image-container {
+    display: flex;
+    max-height: 500px;
+    border: none;
+    justify-content: center;
+}
+
+/* hero image */
+.hero .hero-image {
+    height: 60%; /* Resize logo */
+    width: 60%;
+    border-radius: 10px;
+}
