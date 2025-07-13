@@ -40,6 +40,25 @@ img {
     padding: 0 15px;
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+/* items */
+.items-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.gap {
+    gap: 5px;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -118,4 +137,9 @@ img {
 
 .text-center {
     text-align: center;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
 }

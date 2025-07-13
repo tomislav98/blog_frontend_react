@@ -1,0 +1,164 @@
+.login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login .container {
+    background-color: white;
+    padding: 0;
+}
+
+.login .container .login-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* IMAGE SECTION */
+.login .container .image-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 20px;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 700px;
+    background: url("../../public/login.jpg") no-repeat;
+    background-size: contain; /* makes the image cover the container */
+    background-position: start;
+}
+
+.login .header-image {
+    font-size: x-large;
+    color: white;
+}
+
+.logo-img {
+    height: 100px;
+    width: 100px;
+}
+
+.login .image-content p {
+    font-size: large;
+    color: white;
+    font-weight: 400;
+}
+
+/* FORM SECTION */
+.login .container .content-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 700px;
+}
+
+/* FORM SECTION */
+
+.login .content-2 form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.login .content-2 form label {
+    font-size: small;
+    font-weight: 400;
+}
+
+.login .content-2 form .check-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: gray;
+    font-weight: 400;
+}
+
+.forgot-password {
+    cursor: pointer;
+    color: gray;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+/*
+.login .content-2 form input {
+
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+}
+*/
+.login .header-container {
+    display: flex;
+    flex-direction: column;
+}
+.login .header-container span {
+    color: grey;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.login .header-form {
+    font-size: x-large;
+}
+
+.login .content-2 form .no-account {
+    color: gray;
+    font-weight: 400;
+    text-align: center;
+}
+
+.register {
+    cursor: pointer;
+    color: gray;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/*  INPUT*/
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    transition: border-color 0.5s ease;
+}
+
+.input-container:focus-within {
+    border-color: #333; /* or any accent color */
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* optional */
+}
+
+.input-container input {
+    padding-left: 10px; /* enough space for the icon */
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.password-container input {
+}

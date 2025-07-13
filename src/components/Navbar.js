@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 import "font-awesome/css/font-awesome.min.css";
 
 function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="container">
@@ -17,9 +20,11 @@ function Navbar() {
             <li>
               <a href="#">Home</a>
             </li>
-
             <li>
-              <a href="#">Search </a>
+              <a href="#">Blog</a>
+            </li>
+            <li>
+              <a href="#">Popular</a>
             </li>
             <li>
               <div className="form">
@@ -34,9 +39,12 @@ function Navbar() {
             </li>
 
             <li>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
               <a className="btn btn-dark" href="#">
                 <i className="fa fa-user"></i>
-                Log in
+                Sign Up
               </a>
             </li>
           </ul>

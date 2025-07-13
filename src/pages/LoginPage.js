@@ -1,18 +1,15 @@
 // src/pages/HomePage.js
 import React from "react";
 import Navbar from "../components/Navbar";
-import Signup from "../components/Signup";
-import Footer from "../components/Footer";
+import Login from "../components/Login";
 import Hero from "../components/Hero";
 import Post from "../components/Post";
-function HomePage() {
+function LoginPage() {
   return (
     <div>
-      <Navbar />
-      <Hero />
-      <Post />
+      <Login />
     </div>
   );
 }
 
-export default HomePage;
+export default LoginPage;
