@@ -7,67 +7,6 @@
     margin-right: 50px;
 }
 
-/* CARD SECTION */
-.post .card-section {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.post .card {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    width: 300px;
-    height: 450px;
-    background: #fff;
-    color: #000;
-    border-radius: 10px;
-    padding: 0;
-    margin-bottom: 20px;
-}
-.post .card .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: start;
-    margin-top: 10px;
-    padding: 10px;
-}
-
-.post .author-section {
-    display: flex;
-    gap: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.post .content-header p {
-    text-align: start;
-}
-
-.post .content-card p {
-    font-size: 12px;
-    font-weight: 400;
-    color: grey;
-}
-
-.card-footer {
-    margin-top: 10px;
-}
-
-.post .card-footer a {
-    font-size: 14px;
-    font-weight: 700;
-    color: #333;
-}
-
-.post .card-footer:hover {
-    text-decoration: underline;
-}
-
 .post .author-section .label-1 {
     display: flex;
     width: 70px;
@@ -96,10 +35,10 @@
     color: grey;
 }
 
-.post .card .header {
-    display: block;
-    height: 200px;
-    width: 100%;
+.post .card-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    gap: 20px; /* space between cards */
 }
 
 /* hero image */

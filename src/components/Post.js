@@ -50,7 +50,7 @@ function Post() {
               <div className="card">
                 <div className="header">
                   {" "}
-                  <img src="/post-1.jpg" alt="hero" className="post-image" />
+                  <img src="/post-1.jpg" alt="hero" className="card-image" />
                 </div>
                 <div className="content">
                   <div className="author-section">

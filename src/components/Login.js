@@ -1,16 +1,19 @@
 // src/components/Login.js
-import { useState } from "react";
+import { useState, useContext } from "react";
 import API from "../api/axios";
 import "../styles/login.css";
 import { UserRound } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
 function Login() {
   const [credentials, setCredentials] = useState({
-    email: "",
+    user_name: "",
     password: "",
   });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -22,6 +25,7 @@ function Login() {
       const { access, refresh } = res.data;
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
+      login();
       alert("Login successful");
       navigate("/");
     } catch (err) {
@@ -49,15 +53,13 @@ function Login() {
                 <h3 className="header-form">Welcome back to the blog</h3>
                 <span className="">Login in your account</span>
               </div>
-              <label htmlFor="emailInput" className="label-email">
-                Your email
-              </label>
+              <label htmlFor="emailInput">Your username</label>
               <div className="input-container">
                 <UserRound color="#6c757d" />
                 <input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
+                  name="user_name"
+                  type="text"
+                  placeholder="Username"
                   onChange={handleChange}
                 />
               </div>

@@ -1,0 +1,9 @@
+.background {
+    width: 100%;
+    height: 100vh; /* full viewport height */
+    background-image: url("../../public/land-background.jpg"); /* relative to public folder */
+    background-size: cover; /* cover whole area */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat; /* no repeat */
+    position: relative;
+}

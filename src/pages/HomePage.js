@@ -1,10 +1,9 @@
 // src/pages/HomePage.js
-import React from "react";
 import Navbar from "../components/Navbar";
-import Signup from "../components/Signup";
-import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Post from "../components/Post";
+import Background from "../components/Background";
+
 function HomePage() {
   return (
     <div>

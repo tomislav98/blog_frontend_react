@@ -1,0 +1,17 @@
+.create-blog {
+    margin-bottom: 50px;
+}
+
+.create-blog .container .create-blog-content {
+    width: 70%;
+}
+
+/* HEADING */
+.create-blog .header-section {
+    display: block;
+    margin-bottom: 50px;
+}
+
+.create-blog .header-section p {
+    color: gray;
+}
