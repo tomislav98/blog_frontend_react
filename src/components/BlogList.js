@@ -2,12 +2,10 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
 import "../styles/blog-list.css";
-import { ChevronRight } from "lucide-react";
-import { ChevronDown } from "lucide-react";
-import { SlidersHorizontal } from "lucide-react";
 import { UserRound } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
@@ -46,10 +44,16 @@ export default function BlogList() {
         <div className="blog-list-content">
           {blogs.map((blog) => (
             <div className="card" key={blog.id}>
-              <div className="header-image">
-                {" "}
-                <img src="/post-1.jpg" alt="hero" className="card-image" />
-              </div>
+              {blog.image && (
+                <div className="header-image">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="header-image"
+                  />
+                </div>
+              )}
+
               <div className="content">
                 <div className="author-section">
                   <div className="label-1">
@@ -75,7 +79,7 @@ export default function BlogList() {
                   </ReactMarkdown>
                 </div>
                 <div className="card-footer">
-                  <a href="#">Read More</a>
+                  <Link to={`/blogs/${blog.id}`}>Read More</Link>
                 </div>
               </div>
             </div>
@@ -85,6 +89,7 @@ export default function BlogList() {
         </div>
         <div style={{ marginTop: "20px" }}>
           <button
+            className="btn btn-dark"
             onClick={() => previous && fetchBlogs(previous)}
             disabled={!previous}
           >
@@ -95,7 +100,11 @@ export default function BlogList() {
             Showing {blogs.length} of {count} posts
           </span>
 
-          <button onClick={() => next && fetchBlogs(next)} disabled={!next}>
+          <button
+            className="btn btn-dark"
+            onClick={() => next && fetchBlogs(next)}
+            disabled={!next}
+          >
             Next
           </button>
         </div>
