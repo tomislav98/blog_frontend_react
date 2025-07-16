@@ -46,6 +46,11 @@
     "react-quill-new": "^3.4.6",
     "react-router-dom": "^7.6.3",
     "react-scripts": "^5.0.1",
+    "rehype-highlight": "^7.0.2",
+    "rehype-sanitize": "^6.0.0",
+    "remark-autolink-headings": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-slug": "^7.0.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4"
   },

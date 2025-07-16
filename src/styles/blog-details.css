@@ -24,8 +24,6 @@
 .blog-details .content {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
 }
 
 .blog-details .blog-header-image {
@@ -36,4 +34,24 @@
 .blog-details .blog-header-image .header-image {
     height: 500px;
     width: 1000px;
+}
+
+.toc {
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    width: 250px;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-left: 2px solid #ccc;
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toc li a {
+    text-decoration: none;
+    color: #007acc;
 }

@@ -13,111 +13,155 @@ Axios
 
 
 
-// BlogPostView.js
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Assuming you're using React Router
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Yes, you can implement a right-hand "paragraph/heading selection" or Table of Contents (ToC) even if you're rendering your blog body using Markdown, but it requires a little setup.
+
+Here’s a breakdown of what you're aiming for:
+✅ What You Want
+
+A sidebar Table of Contents (ToC) that lists:
+
+    Paragraphs (or better: headings like ##, ###)
+
+    Clicking a heading in the sidebar scrolls to that part of the Markdown content
+
+🔧 How To Implement It (Step by Step)
+✅ 1. Use remark + rehype plugins to extract headings
+
+Install:
+
+npm install remark-gfm remark-slug remark-autolink-headings
+
+Then in your component:
+
 import ReactMarkdown from "react-markdown";
-import API from "../api/axios";
+import remarkGfm from "remark-gfm";
+import remarkSlug from "remark-slug";
+import remarkAutolinkHeadings from "remark-autolink-headings";
 
-export default function BlogPostView() {
-  const { slug } = useParams();
-  const [post, setPost] = useState(null);
+Now render:
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await API.get(`/api/posts/${slug}/`);
-        setPost(response.data);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-      }
-    };
+<ReactMarkdown
+  remarkPlugins={[remarkGfm, remarkSlug, remarkAutolinkHeadings]}
+  rehypePlugins={[rehypeSanitize, rehypeHighlight]}
+>
+  {blog.body}
+</ReactMarkdown>
 
-    fetchPost();
-  }, [slug]);
+✅ 2. Extract headings from Markdown body (to build the sidebar)
 
-  if (!post) return <div>Loading...</div>;
+Add this function to extract headings using a regex (basic method):
 
-  return (
-    <div className="blog-post">
-      <h1>{post.title}</h1>
-      <ReactMarkdown>{post.body}</ReactMarkdown>
-    </div>
-  );
+function extractHeadings(markdown: string) {
+  const headingRegex = /^(#{2,6})\s+(.+)$/gm;
+  const headings: { level: number; text: string; slug: string }[] = [];
+
+  let match;
+  while ((match = headingRegex.exec(markdown)) !== null) {
+    const level = match[1].length;
+    const text = match[2];
+    const slug = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-");
+    headings.push({ level, text, slug });
+  }
+
+  return headings;
 }
 
+Use it in your component:
 
+const headings = extractHeadings(blog.body);
 
+✅ 3. Render your ToC
 
+<div className="toc">
+  <h2>Contents</h2>
+  <ul>
+    {headings.map(({ level, text, slug }) => (
+      <li key={slug} style={{ marginLeft: (level - 2) * 20 }}>
+        <a href={`#${slug}`}>{text}</a>
+      </li>
+    ))}
+  </ul>
+</div>
 
+✅ 4. Add styling
 
-
-
-
-
-
-
-
-
-
-
-/* CARD SECTION */
-.post .card-section {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.toc {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  width: 250px;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-left: 2px solid #ccc;
 }
 
-.post .card {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    width: 300px;
-    height: 450px;
-    background: #fff;
-    color: #000;
-    border-radius: 10px;
-    padding: 0;
-    margin-bottom: 20px;
-}
-.post .card .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: start;
-    margin-top: 10px;
-    padding: 10px;
+.toc ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.post .author-section {
-    display: flex;
-    gap: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+.toc li a {
+  text-decoration: none;
+  color: #007acc;
 }
 
-.post .content-header p {
-    text-align: start;
-}
+✅ Example Result
 
-.post .content-card p {
-    font-size: 12px;
-    font-weight: 400;
-    color: grey;
-}
+If your Markdown has:
 
-.card-footer {
-    margin-top: 10px;
-}
+## Introduction
 
-.post .card-footer a {
-    font-size: 14px;
-    font-weight: 700;
-    color: #333;
-}
+### Why AI?
 
-.post .card-footer:hover {
-    text-decoration: underline;
-}
+### History
+
+## Conclusion
+
+The right sidebar will show:
+
+Contents
+- Introduction
+  - Why AI?
+  - History
+- Conclusion
+
+Clicking on a link scrolls to that heading in the article, because remark-slug adds IDs like id="introduction" to the headings.
+✅ Optional Enhancements
+
+    Smooth scrolling (scroll-behavior: smooth)
+
+    Highlight current section on scroll (using IntersectionObserver)
+
+    Collapse/expand nested sections
+
+✅ TL;DR
+
+Yes, you can have a right-side ToC even with Markdown by:
+
+    Using remark-slug to give headings ids
+
+    Parsing the Markdown yourself to extract heading text
+
+    Creating a clickable sidebar linking to those headings
+
+Let me know if you'd like the full React component or live example!
