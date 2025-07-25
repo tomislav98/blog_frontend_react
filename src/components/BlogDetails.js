@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import API from "../api/axios";
 import "../styles/blog-details.css";
@@ -7,79 +7,165 @@ import rehypeSanitize from "rehype-sanitize";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
-// Helper to create slug from heading text (same as your extractHeadings)
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "") // remove special chars including emojis
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-// Recursively get plain text from React children nodes (strings, elements, arrays)
+// Utility to extract plain text from ReactMarkdown children
 function getTextFromReactChildren(children) {
   if (typeof children === "string") return children;
-  if (Array.isArray(children))
+  if (Array.isArray(children)) {
     return children.map(getTextFromReactChildren).join("");
+  }
   if (children && typeof children === "object" && "props" in children) {
     return getTextFromReactChildren(children.props.children);
   }
   return "";
 }
 
-function BlogDetails() {
-  const { id } = useParams();
+// Custom hook to fetch blog post data
+function useBlog(id) {
   const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = `/api/posts/${id}/`;
-
-    API.get(url, {
+    setLoading(true);
+    API.get(`/api/posts/${id}/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
     })
-      .then((response) => {
-        setBlog(response.data);
+      .then((res) => {
+        setBlog(res.data);
+        setError(null);
       })
-      .catch((error) => {
-        console.error("Failed to fetch blog post:", error);
-      });
+      .catch((err) => {
+        console.error("Failed to fetch blog post:", err);
+        setError(err);
+      })
+      .finally(() => setLoading(false));
   }, [id]);
 
-  if (!blog) return <p>Loading...</p>;
+  return { blog, loading, error };
+}
 
-  // Extract headings from markdown body for TOC
-  function extractHeadings(markdown) {
-    const headingRegex = /^(#{2,6})\s+(.+)$/gm;
-    const headings = [];
-    let match;
-    while ((match = headingRegex.exec(markdown)) !== null) {
-      const level = match[1].length;
-      const text = match[2];
-      const slug = slugify(text);
-      headings.push({ level, text, slug });
-    }
-    return headings;
+// Custom hook to fetch and manage comments
+function useComments(postId) {
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    API.get(`/api/posts/${postId}/comments/`)
+      .then((res) => {
+        // If API returns an object with 'results', use that
+        const data = Array.isArray(res.data)
+          ? res.data
+          : (res.data.results ?? []);
+        setComments(data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch comments:", err);
+        setError(err);
+      })
+      .finally(() => setLoading(false));
+  }, [postId]);
+
+  return { comments, setComments, loading, error };
+}
+
+function CommentsList({ comments }) {
+  if (!Array.isArray(comments) || comments.length === 0) {
+    return <p>No comments yet.</p>;
   }
 
-  const headings = extractHeadings(blog.body);
+  return (
+    <ul className="comments-list">
+      {comments.map((comment) => (
+        <li key={comment.id}>
+          <strong>{comment.user?.user_name ?? "Anonymous"}:</strong>{" "}
+          {comment.comment_body}
+          <br />
+          <small>{new Date(comment.created_at).toLocaleString()}</small>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-  // Custom heading components assign correct id by extracting full text
-  const components = {
-    h2: ({ children }) => {
-      const text = getTextFromReactChildren(children);
-      const id = slugify(text);
-      return <h2 id={id}>{children}</h2>;
-    },
-    h3: ({ children }) => {
-      const text = getTextFromReactChildren(children);
-      const id = slugify(text);
-      return <h3 id={id}>{children}</h3>;
-    },
-    // Add more if needed for h4, h5...
+function CommentForm({ onSubmit, value, onChange }) {
+  return (
+    <form onSubmit={onSubmit} className="comment-form">
+      <textarea
+        value={value}
+        onChange={onChange}
+        placeholder="Write a comment..."
+        rows="3"
+        required
+      />
+      <button type="submit">Post Comment</button>
+    </form>
+  );
+}
+
+function BlogDetails() {
+  const { id } = useParams();
+
+  const { blog, loading: blogLoading, error: blogError } = useBlog(id);
+  const {
+    comments,
+    setComments,
+    loading: commentsLoading,
+    error: commentsError,
+  } = useComments(id);
+
+  const [newComment, setNewComment] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+    try {
+      const res = await API.post(
+        `/api/posts/${id}/comments/`,
+        { comment_body: newComment },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        },
+      );
+      setComments((prev) => [...prev, res.data]);
+      setNewComment("");
+    } catch (err) {
+      console.error("Failed to post comment:", err);
+      // Optionally: show user error message here
+    }
   };
+
+  // Generate heading components with correct id attributes for TOC links
+  const components = useMemo(() => {
+    if (!blog?.toc) return {};
+
+    const headingComponents = {};
+    const usedLevels = new Set(blog.toc.map((item) => item.level));
+
+    usedLevels.forEach((level) => {
+      const tag = `h${level}`;
+      headingComponents[tag] = ({ children }) => {
+        const text = getTextFromReactChildren(children);
+        const match = blog.toc.find(
+          (item) => item.text === text && item.level === level,
+        );
+        const id = match?.slug ?? undefined;
+        const HeadingTag = tag;
+        return <HeadingTag id={id}>{children}</HeadingTag>;
+      };
+    });
+
+    return headingComponents;
+  }, [blog]);
+
+  if (blogLoading) return <p>Loading blog post...</p>;
+  if (blogError) return <p>Error loading blog post.</p>;
 
   return (
     <div className="blog-details">
@@ -90,9 +176,10 @@ function BlogDetails() {
               <img src={blog.image} alt={blog.title} className="header-image" />
             </div>
           )}
+
           <h1 className="title">{blog.title}</h1>
           <p className="author">
-            By {blog.user?.user_name || "Unknown"} on{" "}
+            By {blog.user?.user_name ?? "Unknown"} on{" "}
             {new Date(blog.created_at).toLocaleDateString()}
           </p>
 
@@ -100,8 +187,8 @@ function BlogDetails() {
           <div className="toc">
             <h2>Contents</h2>
             <ul>
-              {headings.map(({ level, text, slug }) => (
-                <li key={slug} style={{ marginLeft: (level - 2) * 20 }}>
+              {blog.toc.map(({ level, text, slug }) => (
+                <li key={slug} style={{ marginLeft: (level - 1) * 20 }}>
                   <a href={`#${slug}`}>{text}</a>
                 </li>
               ))}
@@ -117,6 +204,26 @@ function BlogDetails() {
             >
               {blog.body}
             </ReactMarkdown>
+          </div>
+
+          <hr />
+
+          <div className="comments-section">
+            <h2>Comments</h2>
+
+            {commentsLoading ? (
+              <p>Loading comments...</p>
+            ) : commentsError ? (
+              <p>Error loading comments.</p>
+            ) : (
+              <CommentsList comments={comments} />
+            )}
+
+            <CommentForm
+              onSubmit={handleSubmit}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
           </div>
         </div>
       </div>

@@ -1,16 +1,16 @@
 .blog-details-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    justify-content: start;
     align-items: center;
+    width: 100%;
 }
 
 .blog-details .title {
     text-align: center;
     font-size: text-xxl;
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .blog-details .author {
@@ -24,6 +24,7 @@
 .blog-details .content {
     display: flex;
     flex-direction: column;
+    align-items: start;
 }
 
 .blog-details .blog-header-image {
