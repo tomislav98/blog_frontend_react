@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "../styles/posts.css";
+import { fetchAllBlogPost, fetchAllTags } from "../services/blogService";
 import { ChevronRight } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { SlidersHorizontal } from "lucide-react";
-import { UserRound } from "lucide-react";
-import { CalendarDays } from "lucide-react";
+import BlogList from "../components/BlogList";
+
 function Post() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+
+  const [ordering, setOrdering] = useState("-created_at");
+
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const loadAllTags = async () => {
+      const data = await fetchAllTags();
+      setTags(data);
+    };
+    loadAllTags();
+  }, []);
 
   const toggleDropdown = () => {
     setDropDownOpen(!dropDownOpen);
@@ -36,9 +49,36 @@ function Post() {
 
               {dropDownOpen && (
                 <div className="dropdown-content">
-                  <a href="#newest">Newest</a>
-                  <a href="#oldest">Oldest</a>
-                  <a href="#mostpopular">Most popular</a>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOrdering("-created_at");
+                      setDropDownOpen(false);
+                    }}
+                  >
+                    Newest
+                  </a>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOrdering("created_at");
+                      setDropDownOpen(false);
+                    }}
+                  >
+                    Oldest
+                  </a>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOrdering("-view_count");
+                      setDropDownOpen(false);
+                    }}
+                  >
+                    Most popular
+                  </a>
                 </div>
               )}
             </div>
@@ -46,102 +86,7 @@ function Post() {
         </div>
         <div className="flex-row">
           <div className="post-content">
-            <div className="card-section">
-              <div className="card">
-                <div className="header">
-                  {" "}
-                  <img src="/post-1.jpg" alt="hero" className="card-image" />
-                </div>
-                <div className="content">
-                  <div className="author-section">
-                    <div className="label-1">
-                      <UserRound className="icon" />
-                      Admin
-                    </div>
-                    <div className="label-2">
-                      <CalendarDays className="icon" />
-                      24th april 2024
-                    </div>
-                  </div>
-                  <div className="content-header">
-                    <p>React Performance Tips You Should Know</p>
-                  </div>
-                  <div className="content-card">
-                    <p>
-                      Boost your React apps with these simple yet effective
-                      performance tips — from memoization to lazy loading, learn
-                      how to keep your UI fast and responsive.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="#">Read More</a>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="header">
-                  {" "}
-                  <img src="/post-2.jpg" alt="hero" className="post-image" />
-                </div>
-                <div className="content">
-                  <div className="author-section">
-                    <div className="label-1">
-                      <UserRound className="icon" />
-                      Admin
-                    </div>
-                    <div className="label-2">
-                      <CalendarDays className="icon" />
-                      24th april 2024
-                    </div>
-                  </div>
-                  <div className="content-header">
-                    <p>React Performance Tips You Should Know</p>
-                  </div>
-                  <div className="content-card">
-                    <p>
-                      Boost your React apps with these simple yet effective
-                      performance tips — from memoization to lazy loading, learn
-                      how to keep your UI fast and responsive.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="#">Read More</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card">
-                <div className="header">
-                  {" "}
-                  <img src="/post-3.jpg" alt="hero" className="post-image" />
-                </div>
-                <div className="content">
-                  <div className="author-section">
-                    <div className="label-1">
-                      <UserRound className="icon" />
-                      Admin
-                    </div>
-                    <div className="label-2">
-                      <CalendarDays className="icon" />
-                      24th april 2024
-                    </div>
-                  </div>
-                  <div className="content-header">
-                    <p>React Performance Tips You Should Know</p>
-                  </div>
-                  <div className="content-card">
-                    <p>
-                      Boost your React apps with these simple yet effective
-                      performance tips — from memoization to lazy loading, learn
-                      how to keep your UI fast and responsive.
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <a href="#">Read More</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BlogList ordering={ordering} />
           </div>
           <div className="flex-col">
             {" "}
@@ -195,12 +140,9 @@ function Post() {
             <div className="card tag-card">
               <h3 className="header-tag">Tags</h3>
               <ul className="option-tag">
-                <li>prova1</li>
-                <li>prova1</li>
-                <li>prova1</li>
-                <li>prova1</li>
-                <li>prova1</li>
-                <li>prova1</li>
+                {tags.map((tag) => (
+                  <li key={tag.id}>{tag.name}</li>
+                ))}
               </ul>
             </div>
           </div>

@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import { useState } from "react";
-import API from "../api/axios";
+import API from "../services/axios";
 import "../styles/global.css";
 import "../styles/signup.css";
 import { UserRound } from "lucide-react";

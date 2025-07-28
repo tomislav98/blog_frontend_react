@@ -6,23 +6,36 @@
 
 .navbar .container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-image: url("../../public/navbar-background-1.jpg");
+    background-size: cover;
+    height: 500px;
+    border-radius: 16px;
+    padding: 16px;
+}
+.navbar .navbar-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
 }
 
 .navbar .main-menu ul {
     display: flex;
 }
 
-.navbar ul li a {
+.navbar ul li:not(:last-child) a {
     display: block;
     padding: 10px 20px;
     font-weight: 600;
     transition: 0.5s;
+    color: white;
 }
 
 .navbar ul li a:hover {
-    color: var(--primary-color);
+    color: lightblue;
 }
 
 .navbar ul li:last-child a {
@@ -37,18 +50,22 @@
 
 .navbar .form {
     display: flex;
-    background-color: #fff;
+    background-color: rgba(128, 128, 128, 0.3); /* semi-transparent grey */
+    backdrop-filter: blur(10px); /* applies the blur */
+    -webkit-backdrop-filter: blur(10px); /* for Safari support */
     height: 100%; /* or whatever fits your navbar */
     width: 100%;
     padding: 10px 20px;
     border: none;
-    border-radius: 32px;
+    border-radius: 8px;
 }
 
 .navbar .form-control {
     display: flex;
     align-items: center;
     border: none;
+    background-color: transparent;
+    color: white;
 }
 
 .navbar .form-control:focus {
@@ -63,4 +80,49 @@
 
 .navbar .main-menu li:nth-last-child(2) {
     margin-right: 10px;
+}
+
+.navbar .main-menu li:nth-last-child(1) {
+    margin-right: 10px;
+    color: black;
+}
+
+.fa-search {
+    color: white;
+    font-size: 18px; /* optional */
+}
+
+/* NAVBAR HERO TEXT */
+.navbar-hero-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: start;
+    color: white;
+}
+.navbar-hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: white;
+}
+
+.navbar-hero-text p {
+    margin-bottom: 1rem; /* or 16px */
+    line-height: 1.6; /* improves readability */
+}
+
+.fade-in {
+    animation: fadeInAnimation 3s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

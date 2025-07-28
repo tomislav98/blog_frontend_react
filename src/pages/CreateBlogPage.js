@@ -1,11 +1,11 @@
-import CreateBlog from "../components/CreateBlog";
+import BlogEditor from "../components/BlogEditor";
 import Navbar from "../components/Navbar";
 
 function CreateBlogPage() {
   return (
     <div>
       <Navbar />
-      <CreateBlog />
+      <BlogEditor />
     </div>
   );
 }

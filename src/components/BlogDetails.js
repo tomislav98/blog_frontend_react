@@ -1,91 +1,151 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
-import API from "../api/axios";
-import "../styles/blog-details.css";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import { CircleUser } from "lucide-react";
+import { postComment, fetchComments } from "../services/commentService";
+import "github-markdown-css/github-markdown.css";
+import "../styles/blog-details.css";
 
-// Utility to extract plain text from ReactMarkdown children
 function getTextFromReactChildren(children) {
   if (typeof children === "string") return children;
-  if (Array.isArray(children)) {
+  if (Array.isArray(children))
     return children.map(getTextFromReactChildren).join("");
-  }
-  if (children && typeof children === "object" && "props" in children) {
+  if (children && typeof children === "object" && "props" in children)
     return getTextFromReactChildren(children.props.children);
-  }
   return "";
 }
 
-// Custom hook to fetch blog post data
-function useBlog(id) {
-  const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setLoading(true);
-    API.get(`/api/posts/${id}/`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    })
-      .then((res) => {
-        setBlog(res.data);
-        setError(null);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch blog post:", err);
-        setError(err);
-      })
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  return { blog, loading, error };
-}
-
-// Custom hook to fetch and manage comments
 function useComments(postId) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    API.get(`/api/posts/${postId}/comments/`)
-      .then((res) => {
-        // If API returns an object with 'results', use that
-        const data = Array.isArray(res.data)
-          ? res.data
-          : (res.data.results ?? []);
-        setComments(data);
-        setError(null);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch comments:", err);
-        setError(err);
-      })
-      .finally(() => setLoading(false));
+    let mounted = true;
+    (async () => {
+      setLoading(true);
+      try {
+        const data = await fetchComments(postId);
+        if (mounted) {
+          setComments(data);
+          setError(null);
+        }
+      } catch (err) {
+        if (mounted) {
+          console.error("Failed to fetch comments:", err);
+          setError(err);
+        }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, [postId]);
 
   return { comments, setComments, loading, error };
 }
 
-function CommentsList({ comments }) {
-  if (!Array.isArray(comments) || comments.length === 0) {
-    return <p>No comments yet.</p>;
+function groupComments(comments) {
+  const map = {};
+  comments.forEach((c) => (map[c.id] = { ...c, replies: [] }));
+  const nested = [];
+  comments.forEach((c) => {
+    if (c.parent && map[c.parent]) {
+      map[c.parent].replies.push(map[c.id]);
+    } else {
+      nested.push(map[c.id]);
+    }
+  });
+  return nested;
+}
+
+function CommentsList({
+  comments,
+  replyingTo,
+  setReplyingTo,
+  replyText,
+  setReplyText,
+  handleReplySubmit,
+}) {
+  const nestedComments = useMemo(() => groupComments(comments), [comments]);
+
+  function toggleReply(commentId) {
+    if (replyingTo === commentId) {
+      setReplyingTo(null);
+      setReplyText("");
+    } else {
+      setReplyingTo(commentId);
+      setReplyText("");
+    }
   }
+
+  if (!nestedComments.length) return <p>No comments yet.</p>;
 
   return (
     <ul className="comments-list">
-      {comments.map((comment) => (
-        <li key={comment.id}>
-          <strong>{comment.user?.user_name ?? "Anonymous"}:</strong>{" "}
-          {comment.comment_body}
-          <br />
-          <small>{new Date(comment.created_at).toLocaleString()}</small>
+      {nestedComments.map((comment) => (
+        <li key={comment.id} className="user-comment-container">
+          <UserProfileIcon imageUrl="" size={40} />
+          <div className="user-comment-content">
+            <strong>{comment.user?.user_name ?? "Anonymous"}</strong>
+            <small>{new Date(comment.created_at).toLocaleString()}</small>
+            <p>{comment.comment_body}</p>
+
+            <div className="comment-actions">
+              {comment.replies.length > 0 && (
+                <button
+                  onClick={() => toggleReply(comment.id)}
+                  className="toggle-replies-button"
+                >
+                  {replyingTo === comment.id
+                    ? "Hide Replies"
+                    : `View Replies (${comment.replies.length})`}
+                </button>
+              )}
+
+              <button
+                onClick={() =>
+                  replyingTo === comment.id
+                    ? setReplyingTo(null)
+                    : setReplyingTo(comment.id)
+                }
+                className="reply-toggle-button"
+              >
+                {replyingTo === comment.id ? "Cancel Reply" : "Reply"}
+              </button>
+            </div>
+
+            {replyingTo === comment.id && (
+              <div className="reply-dropdown">
+                <CommentForm
+                  onSubmit={(e) => handleReplySubmit(e, comment.id)}
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                />
+              </div>
+            )}
+
+            {comment.replies.length > 0 && replyingTo === comment.id && (
+              <ul className="replies-list">
+                {comment.replies.map((reply) => (
+                  <li key={reply.id} className="reply-item">
+                    <UserProfileIcon imageUrl="" size={30} />
+                    <div className="reply-content">
+                      <strong>{reply.user?.user_name ?? "Anonymous"}</strong>
+                      <small>
+                        {new Date(reply.created_at).toLocaleString()}
+                      </small>
+                      <p>{reply.comment_body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </li>
       ))}
     </ul>
@@ -99,18 +159,45 @@ function CommentForm({ onSubmit, value, onChange }) {
         value={value}
         onChange={onChange}
         placeholder="Write a comment..."
-        rows="3"
+        rows={3}
         required
+        className="text-section"
       />
-      <button type="submit">Post Comment</button>
+      <div className="submit-section">
+        <button type="submit" className="btn btn-dark">
+          Post Comment
+        </button>
+      </div>
     </form>
   );
 }
 
-function BlogDetails() {
-  const { id } = useParams();
+function UserProfileIcon({ imageUrl, size = 40, className, style }) {
+  return (
+    <div
+      className="profile-container"
+      style={{ display: "inline-block", ...style }}
+    >
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt="User Profile"
+          style={{
+            width: size,
+            height: size,
+            borderRadius: "50%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      ) : (
+        <CircleUser size={size} color="#555" />
+      )}
+    </div>
+  );
+}
 
-  const { blog, loading: blogLoading, error: blogError } = useBlog(id);
+function BlogDetails({ blog, id }) {
   const {
     comments,
     setComments,
@@ -119,35 +206,32 @@ function BlogDetails() {
   } = useComments(id);
 
   const [newComment, setNewComment] = useState("");
+  const [replyText, setReplyText] = useState("");
+  const [replyingTo, setReplyingTo] = useState(null);
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e, parent = null) {
     e.preventDefault();
-    if (!newComment.trim()) return;
+    const content = parent ? replyText : newComment;
+    if (!content.trim()) return;
+
     try {
-      const res = await API.post(
-        `/api/posts/${id}/comments/`,
-        { comment_body: newComment },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-        },
-      );
+      const res = await postComment(id, content, parent);
       setComments((prev) => [...prev, res.data]);
-      setNewComment("");
+      if (parent) {
+        setReplyText("");
+        setReplyingTo(null);
+      } else {
+        setNewComment("");
+      }
     } catch (err) {
       console.error("Failed to post comment:", err);
-      // Optionally: show user error message here
     }
-  };
+  }
 
-  // Generate heading components with correct id attributes for TOC links
   const components = useMemo(() => {
     if (!blog?.toc) return {};
-
     const headingComponents = {};
-    const usedLevels = new Set(blog.toc.map((item) => item.level));
-
+    const usedLevels = new Set(blog.toc.map(({ level }) => level));
     usedLevels.forEach((level) => {
       const tag = `h${level}`;
       headingComponents[tag] = ({ children }) => {
@@ -155,36 +239,60 @@ function BlogDetails() {
         const match = blog.toc.find(
           (item) => item.text === text && item.level === level,
         );
-        const id = match?.slug ?? undefined;
+        const id = match?.slug;
         const HeadingTag = tag;
         return <HeadingTag id={id}>{children}</HeadingTag>;
       };
     });
-
     return headingComponents;
   }, [blog]);
-
-  if (blogLoading) return <p>Loading blog post...</p>;
-  if (blogError) return <p>Error loading blog post.</p>;
 
   return (
     <div className="blog-details">
       <div className="container">
         <div className="blog-details-content">
-          {blog.image && (
-            <div className="blog-header-image">
-              <img src={blog.image} alt={blog.title} className="header-image" />
-            </div>
-          )}
+          <main className="main-content">
+            <article className="markdown-body">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeSanitize, rehypeHighlight]}
+                components={components}
+              >
+                {blog.body}
+              </ReactMarkdown>
+            </article>
 
-          <h1 className="title">{blog.title}</h1>
-          <p className="author">
-            By {blog.user?.user_name ?? "Unknown"} on{" "}
-            {new Date(blog.created_at).toLocaleDateString()}
-          </p>
+            <section className="comments-section">
+              <h2>Comments</h2>
+              <p className="comments-count">{comments.length} Comments</p>
+              <hr className="divider" />
+              <div className="form-header">
+                <UserProfileIcon imageUrl="" size={40} />
+                <CommentForm
+                  onSubmit={handleSubmit}
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+              </div>
 
-          {/* Table of Contents */}
-          <div className="toc">
+              {commentsLoading ? (
+                <p>Loading comments...</p>
+              ) : commentsError ? (
+                <p>Error loading comments.</p>
+              ) : (
+                <CommentsList
+                  comments={comments}
+                  replyingTo={replyingTo}
+                  setReplyingTo={setReplyingTo}
+                  replyText={replyText}
+                  setReplyText={setReplyText}
+                  handleReplySubmit={handleSubmit}
+                />
+              )}
+            </section>
+          </main>
+
+          <aside className="toc">
             <h2>Contents</h2>
             <ul>
               {blog.toc.map(({ level, text, slug }) => (
@@ -193,38 +301,7 @@ function BlogDetails() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Blog Content */}
-          <div className="content">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeSanitize, rehypeHighlight]}
-              components={components}
-            >
-              {blog.body}
-            </ReactMarkdown>
-          </div>
-
-          <hr />
-
-          <div className="comments-section">
-            <h2>Comments</h2>
-
-            {commentsLoading ? (
-              <p>Loading comments...</p>
-            ) : commentsError ? (
-              <p>Error loading comments.</p>
-            ) : (
-              <CommentsList comments={comments} />
-            )}
-
-            <CommentForm
-              onSubmit={handleSubmit}
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-          </div>
+          </aside>
         </div>
       </div>
     </div>

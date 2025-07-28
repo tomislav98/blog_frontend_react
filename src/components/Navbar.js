@@ -5,20 +5,63 @@ import "../styles/navbar.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useLocation } from "react-router-dom";
 
-function Navbar() {
+function getHeroContent(pathname, blog) {
+  if (pathname === "/blogs") {
+    return {
+      heroTitle: "Explore Our Latest Blogs",
+      heroDescription1: "Find insightful posts on coding and tech.",
+      heroDescription2: "Stay updated with the latest trends and tutorials.",
+    };
+  } else if (pathname === "/create-blog") {
+    return {
+      heroTitle: "Create Your Own Blog Post",
+      heroDescription1: "Share your knowledge with the community.",
+      heroDescription2: "Write about what you’re passionate about.",
+    };
+  } else if (pathname === "/login") {
+    return {
+      heroTitle: "Welcome Back!",
+      heroDescription1: "Log in to access your personalized dashboard.",
+      heroDescription2: "Let’s get you back to coding.",
+    };
+  } else if (/^\/blogs\/\d+$/.test(pathname)) {
+    // Use dynamic blog data if available
+    return {
+      heroTitle: blog?.title || "Reading Blog Post",
+      heroDescription1: blog
+        ? blog.summary || "Dive deep into this insightful article."
+        : "Dive deep into this insightful article.",
+      heroDescription2: blog?.user?.user_name
+        ? `Written by ${blog.user.user_name} on ${new Date(blog.created_at).toLocaleDateString()}`
+        : "Enjoy the content and share your thoughts below.",
+    };
+  } else {
+    return {
+      heroTitle: "Hi, I'm Kaido 👋",
+      heroDescription1:
+        "Welcome to Kaido’s Blog — your go-to place for coding tips, tech insights, and the occasional deep dive into software craftsmanship.",
+      heroDescription2:
+        "Whether you're a beginner or a seasoned developer, I share what I learn while building projects, solving problems, and exploring new tools. Join me on this journey!",
+    };
+  }
+}
+
+function Navbar({ blog }) {
   const [searchOpen, setSearchOpen] = useState(false);
+  const location = useLocation();
+
+  const { heroTitle, heroDescription1, heroDescription2 } = getHeroContent(
+    location.pathname,
+    blog,
+  );
 
   const { isLoggedIn, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
     <nav className="navbar">
       <div className="container">
-        <div className="logo">
-          <a href="#">
-            <img src="/logo.png" alt="logo" className="logo-img" />
-          </a>
-        </div>
         <div className="main-menu">
           <ul>
             <li>
@@ -49,7 +92,7 @@ function Navbar() {
                 </li>
                 <li>
                   <button
-                    className="btn btn-dark"
+                    className="btn"
                     onClick={() => {
                       localStorage.removeItem("access_token");
                       logout();
@@ -67,13 +110,20 @@ function Navbar() {
                   <Link to="/login">Log in</Link>
                 </li>
                 <li>
-                  <Link to="/signup" className="btn btn-dark">
+                  <Link to="/signup" className="btn btn-primary">
                     <i className="fa fa-user"></i> Sign Up
                   </Link>
                 </li>
               </>
             )}
           </ul>
+        </div>
+        <div className="navbar-hero-section">
+          <div className="navbar-hero-text fade-in" key={location.pathname}>
+            <h1>{heroTitle}</h1>
+            <p>{heroDescription1}</p>
+            <p>{heroDescription2}</p>
+          </div>
         </div>
       </div>
     </nav>

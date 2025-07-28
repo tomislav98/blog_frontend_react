@@ -1,34 +1,40 @@
 // src/components/BlogList.jsx
 import { useEffect, useState } from "react";
-import API from "../api/axios";
 import "../styles/blog-list.css";
 import { UserRound } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import Filter from "./Filter";
+import Pagination from "./Pagination";
 
-export default function BlogList() {
+import {
+  fetchAllBlogPost,
+  fetchAllBlogPostByUrl,
+} from "../services/blogService";
+
+export default function BlogList({ ordering }) {
   const [blogs, setBlogs] = useState([]);
   const [count, setCount] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 3;
 
-  const fetchBlogs = async (url = "/api/posts/") => {
+  const fetchBlogs = async (page = 1) => {
     setLoading(true);
     try {
-      const response = await API.get(url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      });
+      const response = await fetchAllBlogPost(ordering, page);
+      console.log(response);
 
       setBlogs(response.data.results);
       setCount(response.data.count);
       setNext(response.data.next);
       setPrevious(response.data.previous);
+      setCurrentPage(page); // ✅ Update current page
     } catch (err) {
-      console.error("Error fetching blogs:", err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -36,12 +42,12 @@ export default function BlogList() {
 
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [ordering]);
 
   return (
     <div className="blog-list">
       <div className="container">
-        <div className="blog-list-content">
+        <div className="blog-list-content" key={currentPage}>
           {blogs.map((blog) => (
             <div className="card" key={blog.id}>
               {blog.image && (
@@ -87,27 +93,12 @@ export default function BlogList() {
 
           {loading && <p>Loading...</p>}
         </div>
-        <div style={{ marginTop: "20px" }}>
-          <button
-            className="btn btn-dark"
-            onClick={() => previous && fetchBlogs(previous)}
-            disabled={!previous}
-          >
-            Previous
-          </button>
-
-          <span style={{ margin: "0 10px" }}>
-            Showing {blogs.length} of {count} posts
-          </span>
-
-          <button
-            className="btn btn-dark"
-            onClick={() => next && fetchBlogs(next)}
-            disabled={!next}
-          >
-            Next
-          </button>
-        </div>
+        <Pagination
+          count={count}
+          blogsPerPage={blogsPerPage}
+          currentPage={currentPage}
+          onPageChange={fetchBlogs}
+        />
       </div>
     </div>
   );

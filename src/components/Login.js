@@ -1,6 +1,6 @@
 // src/components/Login.js
 import { useState, useContext } from "react";
-import API from "../api/axios";
+import API from "../services/axios";
 import "../styles/login.css";
 import { UserRound } from "lucide-react";
 import { LockKeyhole } from "lucide-react";

@@ -4,7 +4,8 @@
 
 Axios
 
-
+1) When creating a post, I need for my UI:
+    title, body, status, tag_names, category_names, image for upload
 
 
 
