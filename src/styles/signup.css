@@ -6,12 +6,12 @@
     height: 100vh;
 }
 
-.signup .container {
-    background-color: white;
+.signup {
+    background-color: var(--primary-input-color);
     padding: 0;
 }
 
-.signup .container .signup-content {
+.signup .signup-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,18 +22,48 @@
 
 /* NEW */
 /* IMAGE SECTION */
-.signup .container .image-content {
+@keyframes darkMoonlightShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.signup .image-content {
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: start;
     padding: 20px;
     flex-wrap: wrap;
-    width: 500px;
-    height: 700px;
-    background: url("../../public/login.jpg") no-repeat;
-    background-size: contain; /* makes the image cover the container */
-    background-position: start;
+    width: 50%;
+    height: 100%;
+
+    background:
+        /* Moonlight glow */
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(255, 255, 224, 0.3),
+            transparent 60%
+        ),
+        /* Soft highlight for extra depth */
+            radial-gradient(
+                circle at 30% 30%,
+                rgba(255, 255, 255, 0.15),
+                transparent 70%
+            ),
+        /* Base gradient */
+            linear-gradient(135deg, #121926, #22303f, #34495e, #4a607a);
+
+    background-size: 800% 800%;
+    animation: darkMoonlightShift 60s ease infinite;
+
+    background-color: transparent;
 }
 
 .signup .header-image {
@@ -53,13 +83,13 @@
 }
 
 /* FORM SECTION */
-.signup .container .content-2 {
+.signup .content-2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 700px;
-    width: 700px;
+    height: 100%;
+    width: 50%;
 }
 
 /* FORM SECTION */

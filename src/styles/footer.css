@@ -3,111 +3,78 @@
 
 footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100%;
-    background-color: var(--brand-color-3, #222); /* fallback to dark */
+    background-color: var(--brand-color-1); /* fallback to dark */
     color: white;
-    background-color: var(--footer-color);
     padding: 2rem;
-    align-items: center;
-    text-align: center;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* slight elevation */
     font-size: 0.9rem;
 }
 
 .footer-content-1 {
     display: flex;
-    width: 70%;
-    flex-direction: row;
+    flex-direction: column;
+    flex: 2;
     justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem;
 }
+
+/* SECTION TWO */
 
 .footer-content-2 {
     display: flex;
-    width: 70%;
+    flex-direction: column;
+    flex: 2;
+    padding: 1rem;
+}
+
+.footer-content-2 .flex-row-content-2 {
+    display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    gap: 2rem;
-}
-
-.footer-content-section-1 {
-    display: flex;
-    flex-direction: column;
-
     justify-content: start;
-    align-items: start;
-}
-.footer-content-section-1 p {
-    max-width: 400px; /* or any value you want */
-    text-align: left;
+    gap: 10rem;
 }
 
-.footer-content-section-1 a {
-    display: block; /* Stack links vertically */
-    color: var(--grey100); /* Adjust to match footer */
-    text-decoration: none;
-    font-size: 0.9rem;
+.footer-content-2 .btn {
+    width: 200px;
 }
 
-.footer-content-section-2 {
+.footer-content-2 ul li {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* SECTION FOURE */
+
+.footer-content-3 {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    flex: 3;
+    padding: 1rem;
+    gap: 1rem;
 }
 
-.footer-content-section-2 a {
-    display: block; /* Stack links vertically */
-    color: var(--grey100); /* Adjust to match footer */
-    text-decoration: none;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
+.footer-content-3 h3 {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    gap: 6px;
 }
 
-.footer-content-section-3 {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-.footer-nav {
-    margin-top: 1rem;
-}
-
-.footer-nav a {
+.footer-content-3 span a {
     color: white;
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.footer-nav a:hover {
     text-decoration: underline;
 }
 
-hr.solid {
-    all: unset;
-    border-top: 1px solid #888;
+.footer-content-3 .input-container {
+    color: white;
+    background-color: white;
+    width: 60%;
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tag {
-    flex: 0 0 calc((100% / 3) - 0.5rem);
-    display: inline-block;
-    background-color: var(--grey700); /* nice blog-blue */
-    color: var(--grey100);
-    padding: 1.2rem 0.4rem;
-    border-radius: 10px; /* pill shape */
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.tag:hover {
-    background-color: #666;
+.footer-content-3 .btn-primary {
+    height: 50px;
 }

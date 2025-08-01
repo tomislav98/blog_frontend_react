@@ -172,6 +172,20 @@ function CommentForm({ onSubmit, value, onChange }) {
   );
 }
 
+function Toc({ blog }) {
+  return (
+    <aside className="toc">
+      <ul>
+        {blog.toc.map(({ level, text, slug }) => (
+          <li key={slug}>
+            <a href={`#${slug}`}>{text}</a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
+}
+
 function UserProfileIcon({ imageUrl, size = 40, className, style }) {
   return (
     <div
@@ -193,6 +207,18 @@ function UserProfileIcon({ imageUrl, size = 40, className, style }) {
       ) : (
         <CircleUser size={size} color="#555" />
       )}
+    </div>
+  );
+}
+
+function UserProfileDetail({ blog }) {
+  return (
+    <div className="user-profile-detail-container">
+      <h4>Written by</h4>
+      <div className="flex-row">
+        <UserProfileIcon />
+        <p className="">{blog.user.user_name}</p>
+      </div>
     </div>
   );
 }
@@ -249,7 +275,7 @@ function BlogDetails({ blog, id }) {
 
   return (
     <div className="blog-details">
-      <div className="container">
+      <div className="flex-row-container">
         <div className="blog-details-content">
           <main className="main-content">
             <article className="markdown-body">
@@ -262,7 +288,7 @@ function BlogDetails({ blog, id }) {
               </ReactMarkdown>
             </article>
 
-            <section className="comments-section">
+            {/* <section className="comments-section">
               <h2>Comments</h2>
               <p className="comments-count">{comments.length} Comments</p>
               <hr className="divider" />
@@ -289,19 +315,12 @@ function BlogDetails({ blog, id }) {
                   handleReplySubmit={handleSubmit}
                 />
               )}
-            </section>
+            </section>*/}
           </main>
-
-          <aside className="toc">
-            <h2>Contents</h2>
-            <ul>
-              {blog.toc.map(({ level, text, slug }) => (
-                <li key={slug} style={{ marginLeft: (level - 1) * 20 }}>
-                  <a href={`#${slug}`}>{text}</a>
-                </li>
-              ))}
-            </ul>
-          </aside>
+        </div>
+        <div className="aside-container">
+          <Toc blog={blog} />
+          <UserProfileDetail blog={blog} />
         </div>
       </div>
     </div>

@@ -49,46 +49,50 @@ export default function BlogList({ ordering }) {
       <div className="container">
         <div className="blog-list-content" key={currentPage}>
           {blogs.map((blog) => (
-            <div className="card" key={blog.id}>
-              {blog.image && (
-                <div className="header-image">
-                  <img
-                    src={blog.image}
-                    alt={blog.title}
-                    className="header-image"
-                  />
-                </div>
-              )}
+            <Link to={`/blogs/${blog.id}`}>
+              <div className="card" key={blog.id}>
+                {blog.image && (
+                  <div className="header-image">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="header-image"
+                    />
+                  </div>
+                )}
 
-              <div className="content">
-                <div className="author-section">
-                  <div className="label-1">
-                    <UserRound className="icon" />
-                    {blog.user?.user_name || "Unown"}
+                <div className="content">
+                  <div className="content-header">
+                    <h3>{blog.title}</h3>
                   </div>
-                  <div className="label-2">
-                    <CalendarDays className="icon" />
-                    {new Date(blog.created_at).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                  <div className="content-card">
+                    <ReactMarkdown>
+                      {blog.body
+                        .split(" ")
+                        .slice(0, 18)
+                        .join(" ")
+                        .toLowerCase() + "..."}
+                    </ReactMarkdown>
                   </div>
-                </div>
-                <div className="content-header">
-                  <p>{blog.title}</p>
-                </div>
-                <div className="content-card">
-                  <ReactMarkdown>
-                    {blog.body.split(" ").slice(0, 10).join(" ").toLowerCase() +
-                      "..."}
-                  </ReactMarkdown>
-                </div>
-                <div className="card-footer">
-                  <Link to={`/blogs/${blog.id}`}>Read More</Link>
+                  <div className="card-footer">
+                    <div className="author-section">
+                      <div className="label-2">
+                        <CalendarDays className="icon" />
+                        {new Date(blog.created_at).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </div>
+                      <div className="label-1">
+                        <UserRound className="icon" />
+                        {blog.user?.user_name || "Unown"}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
 
           {loading && <p>Loading...</p>}

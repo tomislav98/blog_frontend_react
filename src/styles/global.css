@@ -15,7 +15,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    background-color: var(--brand-color-1);
+    background-color: var(--brand-color-2);
 }
 
 a {
@@ -44,15 +44,28 @@ img {
     padding: 0 15px;
 }
 
+.flex-row-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: start;
+    gap: 6px;
+    width: 100%;
 }
 
 .flex-col {
     display: flex;
     flex-direction: column;
+    justify-content: start;
+    align-items: start;
 }
 /* items */
 .items-center {
@@ -66,8 +79,11 @@ img {
 
 /* Buttons */
 .btn {
-    display: inline-block;
+    display: inline-flex;
     padding: 13px 20px;
+    justify-content: center;
+    gap: 6px;
+    align-items: center;
     background-color: white;
     color: black;
     font-weight: 600;
@@ -83,12 +99,16 @@ img {
 }
 
 .btn-primary {
-    background-color: white;
-    color: black;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
 }
 
 .btn-dark {
-    background-color: var(--dark-color);
+    background-color: #ff9800;
     color: #fff;
 }
 
@@ -185,7 +205,6 @@ img {
     display: flex;
     flex-direction: row;
     align-items: center;
-
     height: 50px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -214,24 +233,31 @@ img {
 .card {
     display: flex;
     flex-direction: column;
-    max-width: 250px;
-    width: 250px;
-    height: 450px;
-    background: #fff;
-    color: #000;
+    max-width: 300px;
+    width: 300px;
+    height: 600px;
+    background: transparent;
+    color: grey;
     border-radius: 10px;
     padding: 0;
     margin-bottom: 20px;
     margin-right: 10px;
-    background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card .header-image {
     display: block;
-    width: 250px;
-    height: 200px;
-    max-width: 250px;
-    max-height: 200px;
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .card .card-image {
@@ -247,8 +273,8 @@ img {
 .card .content {
     display: flex;
     flex-direction: column;
-    width: 250px;
-    max-width: 250px;
+    width: 300px;
+    max-width: 300px;
     align-items: flex-start;
     justify-content: start;
     margin-top: 10px;
@@ -272,9 +298,14 @@ img {
     overflow: hidden;
 }
 
+.card .content-header h3 {
+    color: #1c3c4e;
+    margin-bottom: 0.5rem;
+}
+
 .card .content-card p {
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     color: grey;
 }
 
@@ -285,7 +316,7 @@ img {
 .card .card-footer a {
     font-size: 14px;
     font-weight: 700;
-    color: #333;
+    color: grey;
 }
 
 .card .card-footer:hover {
@@ -296,13 +327,12 @@ img {
     display: flex;
     width: 70px;
     height: 25px;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    border: 1px solid grey;
-    border-radius: 10px;
+    border: none;
     gap: 5px;
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 12px;
+    font-weight: 500;
     color: grey;
 }
 
@@ -310,20 +340,22 @@ img {
     display: inline-flex;
     width: 120px;
     height: 25px;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    border: 1px solid grey;
-    border-radius: 10px;
+    border: none;
     gap: 5px;
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 12px;
+    font-weight: 500;
+    color: grey;
+}
+
+.card .author-section .label-1 .icon {
     color: grey;
 }
 
 .card .content-card {
     display: block;
     height: 100px;
-    font-size: 12px;
     font-weight: 400;
     color: grey;
     text-transform: lowercase;
@@ -333,7 +365,23 @@ img {
 /* PROFILE ICON */
 .profile-container {
     display: block;
-    margin: 16px;
+    margin-right: 1rem;
+}
+
+.user-profile-detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 1rem;
+}
+
+.user-profile-detail-container h4 {
+    margin-bottom: 0.5rem;
+}
+
+.user-profile-detail-container .flex-row p {
+    font-weight: 700;
 }
 
 /* DIVIDER */
@@ -342,4 +390,28 @@ img {
     height: 2px; /* thickness of the line */
     margin: 10px 0; /* spacing */
     background-color: #ccc; /* line color */
+}
+
+/* TAG SECTION */
+.tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 8px;
+    flex-wrap: wrap;
+    width: auto;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: auto;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    margin: 4px; /* optional spacing between tags */
+    color: grey;
+    padding: 16px;
+    font-weight: 700;
 }

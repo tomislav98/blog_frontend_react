@@ -7,12 +7,25 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
 
+function BlogTags({ tags }) {
+  return (
+    <div className="tags">
+      {tags.map((tag) => (
+        <Link key={tag.id} to={`/tags/${tag.slug}`} className="tag">
+          #{tag.slug}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 function getHeroContent(pathname, blog) {
   if (pathname === "/blogs") {
     return {
       heroTitle: "Explore Our Latest Blogs",
       heroDescription1: "Find insightful posts on coding and tech.",
-      heroDescription2: "Stay updated with the latest trends and tutorials.",
+      heroDescription2:
+        "Stay updated with the latest trends anheroTitled tutorials.",
     };
   } else if (pathname === "/create-blog") {
     return {
@@ -92,7 +105,7 @@ function Navbar({ blog }) {
                 </li>
                 <li>
                   <button
-                    className="btn"
+                    className="btn btn-primary"
                     onClick={() => {
                       localStorage.removeItem("access_token");
                       logout();
@@ -123,6 +136,7 @@ function Navbar({ blog }) {
             <h1>{heroTitle}</h1>
             <p>{heroDescription1}</p>
             <p>{heroDescription2}</p>
+            {blog?.tags?.length > 0 && <BlogTags tags={blog.tags} />}
           </div>
         </div>
       </div>

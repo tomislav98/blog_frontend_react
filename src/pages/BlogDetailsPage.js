@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import BlogDetails from "../components/BlogDetails";
+import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchBlogPost } from "../services/blogService";
@@ -15,6 +16,7 @@ function useBlog(id) {
       setLoading(true);
       try {
         const data = await fetchBlogPost(id);
+        console.log(data);
         if (mounted) {
           setBlog(data);
           setError(null);
@@ -47,6 +49,7 @@ function BlogDetailsPage() {
     <div>
       <Navbar blog={blog} />
       <BlogDetails blog={blog} id={id} />
+      <Footer />
     </div>
   );
 }

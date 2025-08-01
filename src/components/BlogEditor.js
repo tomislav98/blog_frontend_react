@@ -11,11 +11,41 @@ export default function BlogEditor() {
   const [status, setStatus] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState(null);
-  const [tagNames, setTagNames] = useState("");
-  const [categoryNames, setCategoryNames] = useState("");
+
+  const [tagInput, setTagInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState("");
+
+  const [tagNames, setTagNames] = useState([]);
+  const [categoryNames, setCategoryNames] = useState([]);
 
   const handleEditorChange = ({ text }) => {
     setBody(text);
+  };
+
+  const addTags = () => {
+    const parsed = tagInput
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag && !tagNames.includes(tag));
+    setTagNames([...tagNames, ...parsed]);
+    setTagInput("");
+  };
+
+  const addCategories = () => {
+    const parsed = categoryInput
+      .split(",")
+      .map((cat) => cat.trim())
+      .filter((cat) => cat && !categoryNames.includes(cat));
+    setCategoryNames([...categoryNames, ...parsed]);
+    setCategoryInput("");
+  };
+
+  const removeTag = (tagToRemove) => {
+    setTagNames(tagNames.filter((tag) => tag !== tagToRemove));
+  };
+
+  const removeCategory = (catToRemove) => {
+    setCategoryNames(categoryNames.filter((cat) => cat !== catToRemove));
   };
 
   const handleSave = async () => {
@@ -23,8 +53,10 @@ export default function BlogEditor() {
     formData.append("title", title.trim());
     formData.append("status", status.trim());
     formData.append("body", body.trim());
-    formData.append("tag_names", tagNames.trim());
-    formData.append("category_names", categoryNames.trim());
+
+    tagNames.forEach((tag) => formData.append("tag_names", tag));
+    categoryNames.forEach((cat) => formData.append("category_names", cat));
+
     if (image) {
       formData.append("image", image);
     }
@@ -78,27 +110,47 @@ export default function BlogEditor() {
           </div>
 
           <h3>Tags</h3>
-          <div className="input-container" style={{ marginBottom: "20px" }}>
+          <div className="input-container" style={{ marginBottom: "10px" }}>
             <Tags />
             <input
               className="form-control"
               type="text"
-              value={tagNames}
-              onChange={(e) => setTagNames(e.target.value)}
-              placeholder="e.g. tech, javascript"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              onBlur={addTags}
+              placeholder="e.g. react, javascript"
             />
+          </div>
+          <div className="chip-container">
+            {tagNames.map((tag, i) => (
+              <span className="chip" key={i} onClick={() => removeTag(tag)}>
+                {tag} &times;
+              </span>
+            ))}
           </div>
 
           <h3>Categories</h3>
-          <div className="input-container" style={{ marginBottom: "20px" }}>
+          <div className="input-container" style={{ marginBottom: "10px" }}>
             <Folder />
             <input
               className="form-control"
               type="text"
-              value={categoryNames}
-              onChange={(e) => setCategoryNames(e.target.value)}
+              value={categoryInput}
+              onChange={(e) => setCategoryInput(e.target.value)}
+              onBlur={addCategories}
               placeholder="e.g. frontend, tutorials"
             />
+          </div>
+          <div className="chip-container">
+            {categoryNames.map((cat, i) => (
+              <span
+                className="chip"
+                key={i}
+                onClick={() => removeCategory(cat)}
+              >
+                {cat} &times;
+              </span>
+            ))}
           </div>
 
           <h3>Image</h3>
@@ -113,7 +165,7 @@ export default function BlogEditor() {
 
           <button
             onClick={handleSave}
-            className="btn btn-dark"
+            className="btn btn-primary"
             style={{ marginTop: 20 }}
           >
             Publish

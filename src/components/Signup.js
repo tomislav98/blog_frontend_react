@@ -36,72 +36,69 @@ function Signup() {
 
   return (
     <section className="signup">
-      <div className="container">
-        <div className="signup-content">
-          <div className="image-content">
-            <div className="header-image-section">
-              <h3 className="header-image">Find you blog</h3>
-              <p>
-                Join our community and start sharing your thoughts with the
-                world.
-              </p>
+      <div className="signup-content">
+        <div className="image-content">
+          <div className="header-image-section">
+            <h3 className="header-image">Find you blog</h3>
+            <p>
+              Join our community and start sharing your thoughts with the world.
+            </p>
+          </div>
+        </div>
+        <div className="content-2">
+          <form onSubmit={handleSignup}>
+            <div className="header-container">
+              <h3 className="header-form">Create an Account</h3>
+              <span className="">Signup in your account</span>
             </div>
-          </div>
-          <div className="content-2">
-            <form onSubmit={handleSignup}>
-              <div className="header-container">
-                <h3 className="header-form">Create an Account</h3>
-                <span className="">Signup in your account</span>
-              </div>
 
-              <label htmlFor="userInput">Username</label>
-              <div className="input-container">
-                <UserRound color="#6c757d" />
-                <input
-                  name="user_name"
-                  type="text"
-                  placeholder="Username"
-                  onChange={handleChange}
-                />
-              </div>
+            <label htmlFor="userInput">Username</label>
+            <div className="input-container">
+              <UserRound color="#6c757d" />
+              <input
+                name="user_name"
+                type="text"
+                placeholder="Username"
+                onChange={handleChange}
+              />
+            </div>
 
-              <label htmlFor="emailInput">Your email</label>
-              <div className="input-container">
-                <Mail color="#6c757d" />
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                />
-              </div>
+            <label htmlFor="emailInput">Your email</label>
+            <div className="input-container">
+              <Mail color="#6c757d" />
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={handleChange}
+              />
+            </div>
 
-              <label htmlFor="passwordInput">Password</label>
-              <div className="input-container">
-                <LockKeyhole color="#6c757d" />
-                <input
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                />
-              </div>
-              <label htmlFor="passwordInput">Confirm Password</label>
-              <div className="input-container">
-                <LockKeyhole color="#6c757d" />
-                <input
-                  name="password2"
-                  type="password"
-                  placeholder="Confirm password"
-                  onChange={handleChange}
-                />
-              </div>
+            <label htmlFor="passwordInput">Password</label>
+            <div className="input-container">
+              <LockKeyhole color="#6c757d" />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={handleChange}
+              />
+            </div>
+            <label htmlFor="passwordInput">Confirm Password</label>
+            <div className="input-container">
+              <LockKeyhole color="#6c757d" />
+              <input
+                name="password2"
+                type="password"
+                placeholder="Confirm password"
+                onChange={handleChange}
+              />
+            </div>
 
-              <button type="submit" className="btn btn-dark">
-                SignUp
-              </button>
-            </form>
-          </div>
+            <button type="submit" className="btn btn-dark">
+              SignUp
+            </button>
+          </form>
         </div>
       </div>
     </section>

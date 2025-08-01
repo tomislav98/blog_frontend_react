@@ -5,56 +5,92 @@
     align-items: center;
     height: 100vh;
 }
-
-.login .container {
-    background-color: white;
-    padding: 0;
-}
-
-.login .container .login-content {
+.login .login-content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
+    background-color: var(--brand-color-1);
 }
 
 /* IMAGE SECTION */
-.login .container .image-content {
+@keyframes darkMoonlightShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login .image-content {
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: start;
     padding: 20px;
     flex-wrap: wrap;
-    width: 500px;
-    height: 700px;
-    background: url("../../public/login.jpg") no-repeat;
-    background-size: contain; /* makes the image cover the container */
+    width: 50%;
+    height: 100%;
+
+    background-image: url("../../public/login-background-code.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
     background-position: start;
+    background-size: cover;
+
+    background-color: transparent;
 }
 
-.login .header-image {
+.login .video-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 20px;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+}
+
+#myVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* 👈 fill parent width */
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.5); /* Optional: darken to improve text readability */
+}
+
+.login .video-content .flex-col {
+    z-index: 2;
+}
+
+.login .header-video {
     font-size: x-large;
-    color: white;
+    color: var(--primary-text-color);
 }
 
-.logo-img {
-    height: 100px;
-    width: 100px;
-}
-
-.login .image-content p {
+.login .video-content p {
     font-size: large;
-    color: white;
+    color: var(--primary-text-color);
     font-weight: 400;
 }
 
 /* FORM SECTION */
-.login .container .content-2 {
+.login .content-2 {
     display: flex;
     flex-direction: column;
+    width: 50%;
     align-items: center;
     justify-content: space-around;
     height: 700px;
@@ -73,6 +109,7 @@
 .login .content-2 form label {
     font-size: small;
     font-weight: 400;
+    color: var(--primary-text-color);
 }
 
 .login .content-2 form .check-container {
@@ -86,49 +123,49 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: gray;
+    color: var(--primary-text-color);
     font-weight: 400;
 }
 
 .forgot-password {
     cursor: pointer;
-    color: gray;
+    color: var(--primary-text-color);
     font-weight: bold;
     font-size: 0.9rem;
     text-decoration: underline;
 }
-/*
-.login .content-2 form input {
 
-    height: 50px;
-    border: 1px solid lightgray;
+.login .content-2 form input {
+    border: none;
     border-radius: 10px;
     padding: 10px;
+    background-color: transparent;
 }
-*/
+
 .login .header-container {
     display: flex;
     flex-direction: column;
 }
 .login .header-container span {
-    color: grey;
+    color: var(--primary-text-color);
     font-weight: 300;
     font-size: 1rem;
 }
 
 .login .header-form {
     font-size: x-large;
+    color: var(--primary-text-color);
 }
 
 .login .content-2 form .no-account {
-    color: gray;
+    color: var(--primary-text-color);
     font-weight: 400;
     text-align: center;
 }
 
 .register {
     cursor: pointer;
-    color: gray;
+    color: var(--primary-text-color);
     text-decoration: underline;
     font-weight: bold;
 }
@@ -145,6 +182,7 @@
     border-radius: 10px;
     padding: 10px;
     transition: border-color 0.5s ease;
+    background-color: var(--primary-text-color);
 }
 
 .input-container:focus-within {

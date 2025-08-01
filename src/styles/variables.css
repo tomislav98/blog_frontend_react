@@ -1,14 +1,19 @@
 :root {
     /* BRAND COLOR */
-    --brand-color-1: #f8f9fa;
-    --brand-color-2: #ffcda3;
+    --brand-color-1: #0f2027;
+    --brand-color-2: #f8f9fa;
     --brand-color-3: #fce2ce;
     --brand-color-4: #ffede5;
     --brand-color-5: #fff5ef;
     /* SYSTEM COLOR */
     --dark-color: #101010;
-
-    --primary-color: #fff;
+    --primary-text-color: #fff;
+    --primary-text-color-dark: #0f2027;
+    --primary-input-color: #fff;
+    --primary-color: #ffc107;
+    --secondary-color: #4dd0e1;
+    --on-hover-color: #4dd0e1;
+    --main-card-color: #1c2c34;
     --success-color: #16c79a;
     --danger-color: #ef4f4f;
     --warning-color: #f6c065;

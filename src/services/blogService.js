@@ -21,3 +21,8 @@ export const fetchAllTags = async () => {
   const response = await API.get(`/api/tags/`, {});
   return response.data.results;
 };
+
+export const getchPostBySlug = async (tagSlug) => {
+  const response = await API.get(`/api/posts/by-tag/?tag=${tagSlug}`);
+  return response;
+};

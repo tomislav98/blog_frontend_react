@@ -8,9 +8,71 @@ Axios
     title, body, status, tag_names, category_names, image for upload
 
 
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+const PostsByTag = ({ tagSlug }) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/posts/by-tag/?tag=${tagSlug}`)
+      .then(res => setPosts(res.data))
+      .catch(err => console.error('Failed to fetch posts by tag:', err));
+  }, [tagSlug]);
+
+  return (
+    <div>
+      <h2>Posts tagged with "{tagSlug}"</h2>
+      {posts.map(post => (
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <p>{post.body.slice(0, 150)}...</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default PostsByTag;
 
 
 
+
+COLORS
+
+Use these for buttons, links, or highlights:
+
+    #00bcd4 – Bright cyan / teal (modern & energetic)
+
+    #4dd0e1 – Softer teal (good for hover/secondary elements)
+
+    #ff9800 – Warm orange (great contrast pop)
+
+    #ffc107 – Amber (pairs well for call-to-actions)
+
+    #ff3d00 – Red-orange (bold, attention-grabbing)
+
+
+For text, borders, backgrounds:
+
+    #ffffff – White (for high contrast text)
+
+    #f5f5f5 – Light gray (backgrounds, dividers)
+
+    #b0bec5 – Cool gray (subtle text, icons)
+
+    #263238 – Dark gray-blue (secondary dark surfaces)
+
+
+4. Analogous Colors (blues and greens that blend well)
+
+    #1c3c4e – Muted navy blue
+
+    #1e3c72 – Deep royal blue (stylish headers or gradients)
+
+    #1b524b – Dark teal
+
+    #145374 – Muted ocean blue
 
 
 
@@ -166,3 +228,36 @@ Yes, you can have a right-side ToC even with Markdown by:
     Creating a clickable sidebar linking to those headings
 
 Let me know if you'd like the full React component or live example!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+background:
+        /* Moonlight glow */
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(255, 255, 224, 0.3),
+            transparent 60%
+        ),
+        /* Soft highlight for extra depth */
+            radial-gradient(
+                circle at 30% 30%,
+                rgba(255, 255, 255, 0.15),
+                transparent 70%
+            ),
+        /* Base gradient */
+            linear-gradient(135deg, #121926, #22303f, #34495e, #4a607a);
