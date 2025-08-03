@@ -32,7 +32,9 @@
     display: flex;
     flex-direction: column;
     margin-left: auto;
-    padding: 1rem;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
 }
 
 /* TOC SECTION */

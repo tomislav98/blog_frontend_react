@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function Pagination({ count, blogsPerPage, currentPage, onPageChange }) {
   const totalPages = Math.ceil(count / blogsPerPage);
+  console.log("This is count:" + count);
+  console.log("This is blogsPerPage:" + blogsPerPage);
+  console.log("this is total page:" + totalPages);
 
   return (
     <div className="footer-pagination">

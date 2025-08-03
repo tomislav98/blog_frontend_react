@@ -22,7 +22,7 @@ export const fetchAllTags = async () => {
   return response.data.results;
 };
 
-export const getchPostBySlug = async (tagSlug) => {
-  const response = await API.get(`/api/posts/by-tag/?tag=${tagSlug}`);
+export const getPostBySlug = async (slug) => {
+  const response = await API.get(`/api/posts/by-slug/?slug=${slug}`);
   return response;
 };

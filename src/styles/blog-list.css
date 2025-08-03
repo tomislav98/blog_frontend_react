@@ -23,9 +23,3 @@
         transform: translateY(0);
     }
 }
-
-.footer-pagination {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}

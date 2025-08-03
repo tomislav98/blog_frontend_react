@@ -20,7 +20,7 @@ export default function BlogList({ ordering }) {
   const [previous, setPrevious] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 3;
+  const blogsPerPage = 6;
 
   const fetchBlogs = async (page = 1) => {
     setLoading(true);
@@ -62,6 +62,17 @@ export default function BlogList({ ordering }) {
                 )}
 
                 <div className="content">
+                  <div className="category">
+                    {blog.category_names && blog.category_names.length > 0 ? (
+                      blog.category_names.map((category, index) => (
+                        <span key={index} className="category-badge">
+                          {category}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="category-badge">Uncategorized</span>
+                    )}
+                  </div>
                   <div className="content-header">
                     <h3>{blog.title}</h3>
                   </div>

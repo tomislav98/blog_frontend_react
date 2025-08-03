@@ -34,6 +34,46 @@
     }
 }
 
+.signup .video-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 20px;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+}
+
+#myVideo1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* 👈 fill parent width */
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.5); /* Optional: darken to improve text readability */
+}
+
+.signup .video-content .flex-col {
+    z-index: 2;
+}
+
+.signup .header-video {
+    font-size: x-large;
+    color: var(--primary-text-color);
+}
+
+.signup .video-content p {
+    font-size: large;
+    color: var(--primary-text-color);
+    font-weight: 400;
+}
+
 .signup .image-content {
     display: flex;
     flex-direction: column;
@@ -106,6 +146,7 @@
 .signup .content-2 form label {
     font-size: small;
     font-weight: 400;
+    color: var(--color-text-dark);
 }
 
 .signup .content-2 form .check-container {
@@ -151,6 +192,7 @@
 
 .signup .header-form {
     font-size: x-large;
+    color: var(--color-text-dark);
 }
 
 .signup .content-2 form .no-account {

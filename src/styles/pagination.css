@@ -1,6 +1,6 @@
 .footer-pagination {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     gap: 8px;
     margin-top: 20px;
 }

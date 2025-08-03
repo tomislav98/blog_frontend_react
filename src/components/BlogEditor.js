@@ -55,7 +55,9 @@ export default function BlogEditor() {
     formData.append("body", body.trim());
 
     tagNames.forEach((tag) => formData.append("tag_names", tag));
-    categoryNames.forEach((cat) => formData.append("category_names", cat));
+    categoryNames.forEach((cat) =>
+      formData.append("category_names_input", cat),
+    );
 
     if (image) {
       formData.append("image", image);

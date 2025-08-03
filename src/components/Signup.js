@@ -1,11 +1,12 @@
 // src/components/Signup.js
-import { useState } from "react";
+
 import API from "../services/axios";
 import "../styles/global.css";
 import "../styles/signup.css";
 import { UserRound } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -34,12 +35,24 @@ function Signup() {
     }
   };
 
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5; // slow down video
+    }
+  }, []);
+
   return (
     <section className="signup">
       <div className="signup-content">
-        <div className="image-content">
-          <div className="header-image-section">
-            <h3 className="header-image">Find you blog</h3>
+        <div className="video-content">
+          <video ref={videoRef} id="myVideo1" autoPlay loop muted playsInline>
+            <source src="/sign-up-background.mp4" type="video/mp4" />
+          </video>
+
+          <div className="flex-col">
+            <h3 className="header-video">Find you blog</h3>
             <p>
               Join our community and start sharing your thoughts with the world.
             </p>
