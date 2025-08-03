@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
+import "../styles/global.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";

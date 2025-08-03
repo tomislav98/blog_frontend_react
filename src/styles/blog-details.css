@@ -4,12 +4,17 @@
     justify-content: start;
     align-items: start;
     width: 70%;
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .blog-details-content .main-content {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    background: var(--color-content-bg);
+    color: var(--color-content-text);
 }
 
 .blog-details .comment-form textarea {
@@ -20,15 +25,6 @@
     border: 2px solid #ccc;
     border-radius: 1rem;
     padding: 16px;
-}
-
-.blog-details .toc a {
-    color: black; /* your normal link color */
-    transition: color 0.3s ease; /* smooth transition over 0.3s */
-}
-
-.blog-details .toc a:hover {
-    color: var(--on-hover-color);
 }
 
 /* ASIDE CONTAINER */
@@ -58,10 +54,15 @@
     margin-bottom: 0.5rem;
 }
 
-.toc li a {
+.toc ul li a {
     text-decoration: none;
-    color: black;
+    color: var(--color-dark);
     font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.toc ul li a:hover {
+    color: var(--color-primary-dark);
 }
 
 /* COMMENT SECTION */
@@ -111,4 +112,8 @@
 .comments-section .user-comment-container .user-comment-content {
     display: flex;
     flex-direction: column;
+}
+
+.markdown-body {
+    padding: 2rem;
 }

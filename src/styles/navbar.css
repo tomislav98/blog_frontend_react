@@ -1,7 +1,8 @@
 /* Navbar */
 .navbar {
     background-color: var(--brand-color-2);
-    padding: 20px;
+    padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 @keyframes gradientShift {
@@ -21,14 +22,18 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: var(--brand-color-1);
+    /* Gradient from orange to blue */
+
+    background: linear-gradient(135deg, #0b486b, #f08a22, #f56217);
+
+    color: var(--color-text-light);
     background-size: 400% 400%;
-    animation: gradientShift 30s ease infinite;
 
     height: 500px;
     border-radius: 16px;
-    padding: 16px;
+    padding: 1rem;
 }
+
 .navbar .navbar-section {
     display: flex;
     flex-direction: row;
@@ -48,8 +53,8 @@
     color: white;
 }
 
-.navbar ul li a:hover {
-    color: var(--on-hover-color);
+.navbar ul li:not(:last-child) a:hover {
+    color: var(--color-primary);
 }
 
 .navbar ul li:last-child a {

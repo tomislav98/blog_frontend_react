@@ -10,6 +10,8 @@
     height: 300px;
     border-radius: 16px;
     padding: 16px;
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
 }
 
 .hero .container .hero-content {

@@ -1,28 +1,22 @@
 :root {
-    /* BRAND COLOR */
-    --brand-color-1: #0f2027;
-    --brand-color-2: #f8f9fa;
-    --brand-color-3: #fce2ce;
-    --brand-color-4: #ffede5;
-    --brand-color-5: #fff5ef;
-    /* SYSTEM COLOR */
-    --dark-color: #101010;
-    --primary-text-color: #fff;
-    --primary-text-color-dark: #0f2027;
-    --primary-input-color: #fff;
-    --primary-color: #ffc107;
-    --secondary-color: #4dd0e1;
-    --on-hover-color: #4dd0e1;
-    --main-card-color: #1c2c34;
-    --success-color: #16c79a;
-    --danger-color: #ef4f4f;
-    --warning-color: #f6c065;
-    --info-color: #008891;
-    /* GREYSCALE COLOR */
-    --footer-color: #1a1a1a;
-    --lighter-dark: #333333;
-    --grey900: #101010;
-    --grey700: #484848;
-    --grey400: #9a9a9a;
-    --grey100: #999999;
+    /* Primary Colors */
+    --color-primary: #f26101; /* bright orange - CTA */
+    --color-primary-dark: #c04a00; /* darker orange - hover */
+
+    /* Color dark */
+    --color-dark: black;
+
+    /* Secondary Color */
+    --color-secondary: #0b3d91; /* deep blue */
+
+    /* Accent Color */
+    --color-accent: #3aa17e; /* teal green */
+
+    /* Text Colors */
+    --color-text-dark: #2e2e2e; /* dark gray */
+    --color-text-light: #ffffff; /* white */
+
+    /* Background Colors */
+    --color-content-bg: #f5f5f5; /* light gray */
+    --color-footer-bg: #1c1c1c; /* very dark gray */
 }
