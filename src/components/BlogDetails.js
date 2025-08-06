@@ -3,10 +3,10 @@ import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
-import { CircleUser } from "lucide-react";
 import { postComment, fetchComments } from "../services/commentService";
 import "github-markdown-css/github-markdown.css";
 import "../styles/blog-details.css";
+import UserProfileIcon from "./UserProfileIcon";
 
 function getTextFromReactChildren(children) {
   if (typeof children === "string") return children;
@@ -183,31 +183,6 @@ function Toc({ blog }) {
         ))}
       </ul>
     </aside>
-  );
-}
-
-function UserProfileIcon({ imageUrl, size = 40, className, style }) {
-  return (
-    <div
-      className="profile-container"
-      style={{ display: "inline-block", ...style }}
-    >
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="User Profile"
-          style={{
-            width: size,
-            height: size,
-            borderRadius: "50%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
-      ) : (
-        <CircleUser size={size} color="#555" />
-      )}
-    </div>
   );
 }
 

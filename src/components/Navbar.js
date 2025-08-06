@@ -7,13 +7,15 @@ import "font-awesome/css/font-awesome.min.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { UserRound } from "lucide-react";
+import UserProfileIcon from "./UserProfileIcon";
 
 function BlogTags({ tags }) {
   return (
     <div className="tags">
       {tags.map((tag) => (
         <Link key={tag.id} to={`/tags/${tag.slug}`} className="tag">
-          #{tag.slug}
+          #{tag.name}
         </Link>
       ))}
     </div>
@@ -103,6 +105,12 @@ function Navbar({ blog }) {
               <>
                 <li>
                   <Link to="/create-blog">Create Blog</Link>
+                </li>
+
+                <li className="user-profile">
+                  <Link to={`/user-settings/${blog?.id}`}>
+                    <UserProfileIcon color="white" />
+                  </Link>
                 </li>
                 <li>
                   <button

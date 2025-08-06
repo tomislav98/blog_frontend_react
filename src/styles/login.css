@@ -173,31 +173,5 @@
 
 /*  INPUT*/
 
-.input-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    height: 50px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    transition: border-color 0.5s ease;
-    background-color: var(--primary-text-color);
-}
-
-.input-container:focus-within {
-    border-color: #333; /* or any accent color */
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* optional */
-}
-
-.input-container input {
-    padding-left: 10px; /* enough space for the icon */
-    height: 40px;
-    width: 100%;
-    border: none;
-    outline: none;
-}
-
 .password-container input {
 }

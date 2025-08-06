@@ -88,7 +88,7 @@ export default function BlogEditor() {
         <div className="section-1">
           <h3>Title</h3>
           <div className="input-container" style={{ marginBottom: "20px" }}>
-            <Heading1 />
+            <Heading1 className="color-icon" />
             <input
               className="form-control"
               type="text"
@@ -113,7 +113,7 @@ export default function BlogEditor() {
 
           <h3>Tags</h3>
           <div className="input-container" style={{ marginBottom: "10px" }}>
-            <Tags />
+            <Tags className="color-icon" />
             <input
               className="form-control"
               type="text"
@@ -133,7 +133,7 @@ export default function BlogEditor() {
 
           <h3>Categories</h3>
           <div className="input-container" style={{ marginBottom: "10px" }}>
-            <Folder />
+            <Folder className="color-icon" />
             <input
               className="form-control"
               type="text"

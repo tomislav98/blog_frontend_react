@@ -16,17 +16,12 @@ body {
     font-size: 16px;
     line-height: 1.5;
     background-color: var(--color-content-bg);
-    color: var(--color-text-light);
 }
 
 a {
     text-decoration: none;
     color: var(--color-primary);
     transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--color-primary-dark);
 }
 
 ul {
@@ -88,6 +83,7 @@ img {
     display: inline-flex;
     padding: 13px 20px;
     justify-content: center;
+    width: auto;
     gap: 6px;
     align-items: center;
     background-color: white;
@@ -109,13 +105,15 @@ img {
     color: var(--color-text-light);
 }
 
-.btn-primary:hover {
-    background-color: var(--color-primary-dark);
-}
-
 .btn-secondary {
     background-color: var(--color-secondary);
     color: var(--color-text-light);
+}
+
+.btn-secondary-md {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    height: 30px;
 }
 
 .btn-secondary:hover {
@@ -207,6 +205,14 @@ img {
 
 .text-center {
     text-align: center;
+}
+
+/* ICON */
+.menu-icon {
+    width: var(--icon-size, 16px);
+    height: var(--icon-size, 16px);
+    color: var(--icon-color, var(--color-icon-primary));
+    flex-shrink: 0;
 }
 
 .icon {
@@ -436,4 +442,61 @@ img {
     color: var(--color-text-ligh);
     padding: 16px;
     font-weight: 700;
+}
+
+/*INPUT */
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    transition: border-color 0.5s ease;
+    background-color: var(--primary-text-color);
+}
+
+.input-container:focus-within {
+    border-color: #333; /* or any accent color */
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* optional */
+}
+
+.input-container input {
+    padding-left: 10px; /* enough space for the icon */
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--color-text-dark);
+    background-color: var(--color-content-bg);
+}
+
+.input-container-md {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 35px;
+    margin-bottom: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    transition: border-color 0.5s ease;
+    background-color: var(--primary-text-color);
+}
+
+.input-container-md:focus-within {
+    border-color: #333; /* or any accent color */
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* optional */
+}
+
+.input-container-md input {
+    padding-left: 10px; /* enough space for the icon */
+    height: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--color-text-dark);
+    background-color: var(--color-content-bg);
 }

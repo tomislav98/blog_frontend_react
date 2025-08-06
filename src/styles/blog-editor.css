@@ -1,5 +1,5 @@
 .blog-editor {
-    display: flex; /* FIXED: was `row` */
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 40px;
@@ -33,7 +33,7 @@
 
 .blog-editor .input-container {
     width: 100%;
-    background-color: white;
+    background-color: var(--color-content-bg);
 }
 
 .blog-editor .drop-down-container {
@@ -70,4 +70,8 @@
 
 .blog-editor h3 {
     color: var(--color-text-dark);
+}
+
+.blog-editor .color-icon {
+    color: var(--color-icon-primary);
 }

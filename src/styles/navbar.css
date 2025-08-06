@@ -43,6 +43,7 @@
 
 .navbar .main-menu ul {
     display: flex;
+    align-items: center;
 }
 
 .navbar ul li:not(:last-child) a {
@@ -144,4 +145,15 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.navbar .user-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .user-profile .icon {
+    color: white;
 }

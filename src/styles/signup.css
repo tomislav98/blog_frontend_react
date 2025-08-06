@@ -233,6 +233,7 @@
     width: 100%;
     border: none;
     outline: none;
+    background-color: var(--color-content-bg);
 }
 
 .password-container input {
