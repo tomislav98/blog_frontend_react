@@ -10,7 +10,17 @@ footer {
     color: white;
     padding: 2rem;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* slight elevation */
-    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+footer .container-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    align-items: flex-start;
+    gap: 2rem;
 }
 
 .footer-content-1 {
@@ -19,7 +29,6 @@ footer {
     flex: 2;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 1rem;
 }
 
 /* SECTION TWO */
@@ -29,22 +38,26 @@ footer {
     flex-direction: column;
     flex: 2;
     padding: 1rem;
+    flex-wrap: wrap;
 }
 
 .footer-content-2 .flex-row-content-2 {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: start;
-    gap: 10rem;
-}
-
-.footer-content-2 .btn {
-    width: 200px;
+    gap: 1.5rem;
 }
 
 .footer-content-2 ul li {
     font-weight: 500;
     margin-bottom: 0.5rem;
+}
+
+.footer form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 /* SECTION FOURE */
@@ -55,6 +68,7 @@ footer {
     flex: 3;
     padding: 1rem;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .footer-content-3 h3 {
@@ -70,11 +84,20 @@ footer {
 }
 
 .footer-content-3 .input-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     color: white;
     background-color: white;
-    width: 60%;
+}
+
+.footer-content-3 .input-container input {
+    flex: 1;
+    height: 100%;
+    background-color: white;
 }
 
 .footer-content-3 .btn-primary {
-    height: 50px;
+    white-space: normal; /* allows text to wrap */
+    text-align: center;
 }
