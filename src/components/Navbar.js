@@ -66,6 +66,8 @@ function getHeroContent(pathname, blog) {
 
 function Navbar({ blog }) {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const location = useLocation();
 
   const { heroTitle, heroDescription1, heroDescription2 } = getHeroContent(
@@ -78,68 +80,72 @@ function Navbar({ blog }) {
   return (
     <nav className="navbar">
       <div className="container">
-        <div className="main-menu">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/blogs">Blogs</Link>
-            </li>
-            <li>
-              <a href="#">Popular</a>
-            </li>
-            <li>
-              <div className="form">
-                {" "}
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="form-control"
-                />
-                <i className="fa fa-search"></i>
-              </div>
-            </li>
+        <div className="menu-container">
+          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            <i className="fa fa-bars"></i>
+          </button>
 
-            {isLoggedIn ? (
-              <>
-                <li>
-                  <Link to="/create-blog">Create Blog</Link>
-                </li>
+          <div className={`main-menu ${menuOpen ? "open" : ""}`}>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/blogs">Blogs</Link>
+              </li>
+              <li>
+                <a href="#">Popular</a>
+              </li>
+              <li>
+                <div className="form">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="form-control"
+                  />
+                  <i className="fa fa-search"></i>
+                </div>
+              </li>
 
-                <li className="user-profile">
-                  <Link to={`/user-settings/${blog?.id}`}>
-                    <UserProfileIcon color="white" />
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                      localStorage.removeItem("access_token");
-                      logout();
-                      navigate("/");
-                      // optionally navigate away or refresh
-                    }}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">Log in</Link>
-                </li>
-                <li>
-                  <Link to="/signup" className="btn btn-primary">
-                    <i className="fa fa-user"></i> Sign Up
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+              {isLoggedIn ? (
+                <>
+                  <li>
+                    <Link to="/create-blog">Create Blog</Link>
+                  </li>
+                  <li className="user-profile">
+                    <Link to={`/user-settings/${blog?.id}`}>
+                      <UserProfileIcon color="white" />
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        localStorage.removeItem("access_token");
+                        logout();
+                        navigate("/");
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">Log in</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup" className="btn btn-primary">
+                      <i className="fa fa-user"></i> Sign Up
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
+
         <div className="navbar-hero-section">
           <div className="navbar-hero-text fade-in" key={location.pathname}>
             <h1>{heroTitle}</h1>

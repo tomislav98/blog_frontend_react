@@ -32,6 +32,8 @@
     height: 500px;
     border-radius: 16px;
     padding: 1rem;
+    overflow-y: auto; /* vertical scroll if needed */
+    overflow-x: hidden; /* prevent sideways scroll */
 }
 
 .navbar .navbar-section {
@@ -156,4 +158,55 @@
 
 .navbar .user-profile .icon {
     color: white;
+}
+
+/* MOBILE SECTION */
+/* Hide hamburger on desktop */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* make it span full width */
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .menu-container {
+        justify-content: flex-start; /* push hamburger left only on mobile */
+    }
+    .navbar .main-menu {
+        display: none; /* hide menu by default */
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--brand-color-2);
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .navbar .main-menu.open {
+        display: flex; /* show when toggled */
+    }
+
+    .hamburger {
+        display: flex; /* show only on mobile */
+        justify-content: start;
+    }
+
+    .navbar .main-menu ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .navbar .main-menu ul li {
+        margin-bottom: 1rem;
+    }
 }

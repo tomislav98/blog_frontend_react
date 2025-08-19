@@ -91,7 +91,7 @@ img {
     background-color: white;
     color: black;
     font-weight: 600;
-    font-size: calc(0.4rem + 1vw);
+    font-size: calc(0.5rem + 0.5vw);
     text-decoration: none;
     border: none;
     border-radius: 10px;
@@ -252,9 +252,6 @@ img {
     width: 100%;
     border: none;
     outline: none;
-}
-
-.password-container input {
 }
 
 /* CARD */
