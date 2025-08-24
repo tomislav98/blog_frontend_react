@@ -89,7 +89,7 @@
     padding: 0.5rem 1rem;
 
     background-color: var(--color-info-2);
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     border: 1px solid transparent;
     border-radius: 1rem;
     font-size: calc(0.4rem + 0.5vw);
