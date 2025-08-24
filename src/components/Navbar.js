@@ -114,7 +114,7 @@ function Navbar({ blog }) {
                   </li>
                   <li className="user-profile">
                     <Link to={`/user-settings/${blog?.id}`}>
-                      <UserProfileIcon color="white" />
+                      <UserProfileIcon color="black" />
                     </Link>
                   </li>
                   <li>
@@ -143,15 +143,6 @@ function Navbar({ blog }) {
                 </>
               )}
             </ul>
-          </div>
-        </div>
-
-        <div className="navbar-hero-section">
-          <div className="navbar-hero-text fade-in" key={location.pathname}>
-            <h1>{heroTitle}</h1>
-            <p>{heroDescription1}</p>
-            <p>{heroDescription2}</p>
-            {blog?.tags?.length > 0 && <BlogTags tags={blog.tags} />}
           </div>
         </div>
       </div>

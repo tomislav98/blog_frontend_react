@@ -1,16 +1,10 @@
-.login {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 .login .login-content {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--brand-color-1);
 }
 
@@ -77,12 +71,12 @@
 
 .login .header-video {
     font-size: x-large;
-    color: var(--primary-text-color);
+    color: var(--color-text-light);
 }
 
 .login .video-content p {
     font-size: large;
-    color: var(--primary-text-color);
+    color: var(--color-text-light);
     font-weight: 400;
 }
 
@@ -95,6 +89,12 @@
     justify-content: space-around;
     height: 700px;
     color: var(--color-text-dark);
+}
+
+.login .video-content,
+.login .content-2 {
+    flex: 1 1 500px; /* grow/shrink but minimum 400px */
+    min-width: 200px; /* ensures stacking when too small */
 }
 
 /* FORM SECTION */
@@ -172,6 +172,3 @@
 }
 
 /*  INPUT*/
-
-.password-container input {
-}

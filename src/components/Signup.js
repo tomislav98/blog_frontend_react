@@ -65,10 +65,11 @@ function Signup() {
               <span className="">Signup in your account</span>
             </div>
 
-            <label htmlFor="userInput">Username</label>
+            <label htmlFor="user_name">Username</label>
             <div className="input-container">
               <UserRound color="#6c757d" />
               <input
+                id="user_name"
                 name="user_name"
                 type="text"
                 placeholder="Username"
@@ -76,10 +77,11 @@ function Signup() {
               />
             </div>
 
-            <label htmlFor="emailInput">Your email</label>
+            <label htmlFor="email">Your email</label>
             <div className="input-container">
               <Mail color="#6c757d" />
               <input
+                id="email"
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -87,20 +89,23 @@ function Signup() {
               />
             </div>
 
-            <label htmlFor="passwordInput">Password</label>
+            <label htmlFor="password">Password</label>
             <div className="input-container">
               <LockKeyhole color="#6c757d" />
               <input
+                id="password"
                 name="password"
                 type="password"
                 placeholder="Password"
                 onChange={handleChange}
               />
             </div>
-            <label htmlFor="passwordInput">Confirm Password</label>
+
+            <label htmlFor="password2">Confirm Password</label>
             <div className="input-container">
               <LockKeyhole color="#6c757d" />
               <input
+                id="password2"
                 name="password2"
                 type="password"
                 placeholder="Confirm password"

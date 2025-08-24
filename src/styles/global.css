@@ -11,9 +11,26 @@ html {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+/*
+    Child combinator
+    A > B { ... }
+    Selects all elements B that are direct children of A.
+*/
+
+#root > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 body {
     font-family: "Poppins", sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.5;
     background-color: var(--color-content-bg);
 }
@@ -35,10 +52,48 @@ img {
 /* Utility Classes */
 
 .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 15px;
+    width: 100%; /* Fluid on small screens */
+    padding-left: 1rem; /* Inner spacing */
+    padding-right: 1rem;
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto;
 }
+
+/* Small devices (≥576px) */
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+/* Medium devices (≥768px) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+/* Large devices (≥992px) */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Extra large devices (≥1200px) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Extra extra large devices (≥1400px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
 .container-sm {
     max-width: 800px;
     margin: 0 auto;
@@ -59,7 +114,14 @@ img {
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    gap: 10px;
+    gap: 1rem;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .flex-col {
@@ -91,7 +153,7 @@ img {
     background-color: white;
     color: black;
     font-weight: 600;
-    font-size: calc(0.5rem + 0.5vw);
+    font-size: calc(0.4rem + 0.5vw);
     text-decoration: none;
     border: none;
     border-radius: 10px;
@@ -99,6 +161,7 @@ img {
     transition: 0.5s;
     width: 100%; /* allows button to shrink on small screens */
     max-width: 200px;
+    min-width: 150px;
 }
 
 .btn:hover {
@@ -118,7 +181,7 @@ img {
 .btn-secondary-md {
     background-color: var(--color-secondary);
     color: var(--color-text-light);
-    height: 30px;
+    padding: 0.25rem 0.75rem; /* first vertical then horizontal */
 }
 
 .btn-secondary:hover {

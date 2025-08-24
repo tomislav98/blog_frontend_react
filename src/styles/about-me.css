@@ -1,0 +1,155 @@
+/* ABOUT ME SECTION */
+.about-me {
+    /* 1️⃣ Box model */
+    width: 100%;
+    height: auto; /* full viewport height */
+    margin-bottom: 20%;
+    /* 2️⃣ Visuals / Color */
+    color: var(--color-text-dark);
+}
+
+/* FLEX ROW INSIDE ABOUT ME */
+.about-me .flex-row {
+    /* 1️⃣ Box model */
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    /* 2️⃣ Display / Flexbox */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* SECTION 1 - TEXT CONTENT */
+.about-me .section-1 {
+    /* 2️⃣ Display / Flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+}
+
+/* SECTION 2 - IMAGE CONTAINER */
+.about-me .section-2 {
+    /* 3️⃣ Display / Flexbox */
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.about-me .card {
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    max-width: 600px;
+    max-height: 500px;
+    min-width: 280px;
+    min-height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    background-color: var(--color-content-bg);
+    color: var(--color-text-dark);
+    box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+.about-me .list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    flex: 1;
+    gap: 2rem;
+}
+
+.about-me .list-container ul {
+    list-style: none; /* remove default bullets */
+    padding: 0; /* remove default padding */
+    margin: 0; /* remove default margin */
+
+    display: flex; /* put items in a row */
+    flex-wrap: wrap; /* allow wrapping to new lines */
+    gap: 0.5rem; /* space between badges */
+}
+
+.about-me .badge {
+    width: auto;
+    height: auto;
+
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+
+    background-color: var(--color-info-2);
+    color: var(--color-text-light);
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    font-size: calc(0.4rem + 0.5vw);
+    font-weight: 500;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromUp {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.about-me .section-1,
+.about-me .section-2 {
+    opacity: 0; /* start hidden */
+}
+
+/* Animate when class is added */
+.about-me .section-1.animate {
+    animation: slideInFromLeft 3s ease;
+    opacity: 1;
+    will-change: transform, opacity;
+}
+
+.about-me .section-2.animate {
+    animation: slideInFromRight 3s ease;
+    opacity: 1;
+    will-change: transform, opacity;
+}

@@ -1,26 +1,27 @@
 :root {
     /* Primary Colors */
-    --color-primary: #f26101; /* bright orange - CTA */
-    --color-primary-dark: #c04a00; /* darker orange - hover */
-
-    /* Color dark */
-    --color-dark: black;
+    --color-primary: #2e8b57; /* medium green - CTA */
+    --color-primary-dark: #246b46; /* darker green - hover */
 
     /* Secondary Color */
-    --color-secondary: #0b3d91; /* deep blue */
+    --color-secondary: #4cae4c; /* lighter green - headings, links */
 
     /* Accent Color */
-    --color-accent: #3aa17e; /* teal green */
+    --color-accent: #a3d9a5; /* soft green for highlights/info */
 
     /* Text Colors */
-    --color-text-dark: #2e2e2e; /* dark gray */
-    --color-text-light: #ffffff; /* white */
+    --color-text-dark: #2e2e2e; /* dark gray for main text */
+    --color-text-light: #ffffff; /* white text for dark backgrounds */
 
     /* Background Colors */
-    --color-content-bg: #f5f5f5; /* light gray */
-    --color-footer-bg: #1c1c1c; /* very dark gray */
+    --color-content-bg: #f5fdf5; /* very light greenish gray for content */
+    --color-footer-bg: #1c1c1c; /* very dark gray for footer */
 
     /* Icon Colors */
-    --color-icon-primary: #2e2e2e;
+    --color-icon-primary: #2e2e2e; /* consistent with text */
     --icon-size: 20px;
+
+    /* Optional: info/highlight color */
+    --color-info: #d9f2d9; /* soft green for tips or alerts */
+    --color-info-2: #d0ceb9;
 }

@@ -1,23 +1,10 @@
-.signup {
+.signup-content {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.signup {
-    background-color: var(--primary-input-color);
-    padding: 0;
-}
-
-.signup .signup-content {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-input-color);
 }
 
 /* NEW */
@@ -65,12 +52,12 @@
 
 .signup .header-video {
     font-size: x-large;
-    color: var(--primary-text-color);
+    color: var(--color-text-light);
 }
 
 .signup .video-content p {
     font-size: large;
-    color: var(--primary-text-color);
+    color: var(--color-text-light);
     font-weight: 400;
 }
 
@@ -128,8 +115,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 100%;
     width: 50%;
+}
+
+.signup .video-content,
+.signup .content-2 {
+    flex: 1 1 500px; /* grow/shrink but minimum 400px */
+    min-width: 200px; /* ensures stacking when too small */
 }
 
 /* FORM SECTION */
@@ -137,8 +129,10 @@
 .signup .content-2 form {
     display: flex;
     flex-direction: column;
+
     gap: 1rem;
     max-width: 500px;
+    height: auto;
     width: 500px;
     padding: 20px;
 }
@@ -171,15 +165,7 @@
     font-size: 0.9rem;
     text-decoration: underline;
 }
-/*
-.login .content-2 form input {
 
-    height: 50px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-}
-*/
 .signup .header-container {
     display: flex;
     flex-direction: column;
@@ -213,12 +199,12 @@
 .input-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-
-    height: 50px;
+    padding: 1rem;
+    min-height: 2.5rem;
+    height: 50%;
+    width: 100%;
     border: 1px solid lightgray;
     border-radius: 10px;
-    padding: 10px;
     transition: border-color 0.5s ease;
 }
 
@@ -228,16 +214,14 @@
 }
 
 .input-container input {
-    padding-left: 10px; /* enough space for the icon */
-    height: 40px;
-    width: 100%;
+    padding: 0.5rem;
     border: none;
+    width: 70%;
     outline: none;
     background-color: var(--color-content-bg);
+    font-size: calc(0.4rem + 0.5vw);
 }
 
-.password-container input {
-}
 .signup .btn {
     margin-top: 20px;
 }

@@ -1,8 +1,11 @@
 /* Navbar */
 .navbar {
-    background-color: var(--brand-color-2);
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+    background-color: var(--color-content-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 1rem;
-    margin-bottom: 2rem;
 }
 
 @keyframes gradientShift {
@@ -20,20 +23,12 @@
 .navbar .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     /* Gradient from orange to blue */
 
-    background: linear-gradient(135deg, #0b486b, #f08a22, #f56217);
-
-    color: var(--color-text-light);
+    color: var(--color-text-dark);
     background-size: 400% 400%;
-
-    height: 500px;
-    border-radius: 16px;
-    padding: 1rem;
-    overflow-y: auto; /* vertical scroll if needed */
-    overflow-x: hidden; /* prevent sideways scroll */
 }
 
 .navbar .navbar-section {
@@ -53,7 +48,7 @@
     padding: 10px 20px;
     font-weight: 600;
     transition: 0.5s;
-    color: white;
+    color: var(--color-text-dark);
 }
 
 .navbar ul li:not(:last-child) a:hover {
@@ -87,7 +82,7 @@
     align-items: center;
     border: none;
     background-color: transparent;
-    color: white;
+    color: var(--color-text-dark);
 }
 
 .navbar .form-control:focus {
@@ -110,7 +105,7 @@
 }
 
 .fa-search {
-    color: white;
+    color: var(--color-text-dark);
     font-size: 18px; /* optional */
 }
 

@@ -1,4 +1,3 @@
-import React from "react";
 import "./../styles/footer.css";
 import { ArrowRight } from "lucide-react";
 import { Mail } from "lucide-react";

@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import BlogList from "../components/BlogList";
 import Filter from "../components/Filter";
 import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import AboutMe from "../components/AboutMe";
 import { useState } from "react";
 
 function HomePage() {
@@ -10,8 +12,10 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <Filter ordering={ordering} setOrdering={setOrdering} />
-      <BlogList ordering={ordering} />
+      <Hero />
+      <AboutMe />
+      {/* <Filter ordering={ordering} setOrdering={setOrdering} />*/}
+      {/* <BlogList ordering={ordering} />*/}
       <Footer />
     </>
   );

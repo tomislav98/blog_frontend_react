@@ -92,10 +92,11 @@ function Login() {
               </label>
               <span className="forgot-password">Forgot Password?</span>
             </div>
-
-            <button type="submit" className="btn btn-dark">
-              Login
-            </button>
+            <div className="flex-row-center">
+              <button type="submit" className="btn btn-dark">
+                Login
+              </button>
+            </div>
             <label htmlFor="noAccountRegister" className="no-account">
               No account yet? <span className="register">Register</span>
             </label>
