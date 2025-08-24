@@ -4,8 +4,19 @@
     width: 100%;
     height: auto; /* full viewport height */
     margin-bottom: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     /* 2️⃣ Visuals / Color */
     color: var(--color-text-dark);
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.about-me h2 {
+    margin-bottom: 4rem;
 }
 
 /* FLEX ROW INSIDE ABOUT ME */
@@ -56,7 +67,7 @@
 
     background-color: var(--color-content-bg);
     color: var(--color-text-dark);
-    box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
 }
 
@@ -150,6 +161,12 @@
 
 .about-me .section-2.animate {
     animation: slideInFromRight 3s ease;
+    opacity: 1;
+    will-change: transform, opacity;
+}
+
+.about-me h2.animate {
+    animation: slideInFromUp 3s ease;
     opacity: 1;
     will-change: transform, opacity;
 }

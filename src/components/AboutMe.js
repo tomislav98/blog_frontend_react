@@ -9,6 +9,9 @@ function AboutMe() {
 
   return (
     <section className="about-me">
+      <h2 className={`text-xxl ${inView ? "animate" : ""}`} ref={ref}>
+        About me
+      </h2>
       <div className="flex-row">
         <div className={`section-1 ${inView ? "animate" : ""}`} ref={ref}>
           <div className="card">
