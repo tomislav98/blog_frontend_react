@@ -53,8 +53,6 @@ img {
 
 .container {
     width: 100%; /* Fluid on small screens */
-    padding-left: 1rem; /* Inner spacing */
-    padding-right: 1rem;
     margin-left: auto; /* Center horizontally */
     margin-right: auto;
 }
